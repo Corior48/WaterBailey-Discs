@@ -1,0 +1,13 @@
+{
+  "itemGroup.waterbaileydiscs": "Example Mod Tab",
+  "block.waterbaileydiscs.example_block": "Example Block",
+  "item.waterbaileydiscs.example_item": "Example Item",
+
+  "waterbaileydiscs.configuration.title": "WaterBailey Discs Configs",
+  "waterbaileydiscs.configuration.section.waterbaileydiscs.common.toml": "WaterBailey Discs Configs",
+  "waterbaileydiscs.configuration.section.waterbaileydiscs.common.toml.title": "WaterBailey Discs Configs",
+  "waterbaileydiscs.configuration.items": "Item List",
+  "waterbaileydiscs.configuration.logDirtBlock": "Log Dirt Block",
+  "waterbaileydiscs.configuration.magicNumberIntroduction": "Magic Number Text",
+  "waterbaileydiscs.configuration.magicNumber": "Magic Number"
+}
