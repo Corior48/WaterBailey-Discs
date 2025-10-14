@@ -1,0 +1,10 @@
+{
+  "test_disc": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:test_disc",
+        "stream": true
+      }
+    ]
+  }
+}
