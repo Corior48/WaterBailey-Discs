@@ -1,7 +1,12 @@
 package net.corior48.waterbaileydiscs;
 
+import net.corior48.waterbaileydiscs.item.ModCreativeModeTabs;
 import net.corior48.waterbaileydiscs.item.ModItems;
 import net.corior48.waterbaileydiscs.sound.ModSounds;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.*;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -10,10 +15,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -59,14 +60,7 @@ public class WaterBaileyDiscs {
     // .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
     // Creates a creative tab with the id "waterbaileydiscs:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.waterbaileydiscs")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> CREATIVE_ICON.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(TEST_DISC.get());
-                output.accept(WBUCK.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
-            }).build());
+
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -88,6 +82,7 @@ public class WaterBaileyDiscs {
 
         ModItems.register(modEventBus);
         ModSounds.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -112,7 +107,7 @@ public class WaterBaileyDiscs {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(ModItems.TEST_DISC);
+
         }
     }
 

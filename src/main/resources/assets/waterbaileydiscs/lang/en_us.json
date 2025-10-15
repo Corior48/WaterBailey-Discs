@@ -1,7 +1,16 @@
 {
-  "itemGroup.waterbaileydiscs": "WaterBailey Items!",
+  "itemGroup.waterbaileydiscs.items": "WaterBailey Items",
+  "itemGroup.waterbaileydiscs.discs": "WaterBailey Discs",
   "item.waterbaileydiscs.test_disc": "§bMusic Disc",
   "item.waterbaileydiscs.test_disc.desc": "Bark Boiz - When You're With Me",
+  "item.waterbaileydiscs.sewercats": "§bMusic Disc",
+  "item.waterbaileydiscs.sewercats.desc": "elybeatmaker/GoodTimeWithScar - Sewercats",
   "item.waterbaileydiscs.creative_icon": "The Creative Icon",
-  "item.waterbaileydiscs.wbuck": "§eWbuck"
+  "item.waterbaileydiscs.wbuck": "§eWBuck",
+  "item.waterbaileydiscs.printer": "§dWBuck Printer",
+  "item.waterbaileydiscs.primogem": "§dPrimogem",
+  "item.waterbaileydiscs.copper_token": "Copper Token",
+  "item.waterbaileydiscs.iron_token": "§eIron Token",
+  "item.waterbaileydiscs.gold_token": "§bGolden Token",
+  "item.waterbaileydiscs.netherite_token": "§dNetherite Token"
 }

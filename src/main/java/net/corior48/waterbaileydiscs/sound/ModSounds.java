@@ -16,8 +16,10 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, WaterBaileyDiscs.MODID);
 
-    public static final Supplier<SoundEvent> TEST_SONG = registerSoundEvent("test_disc");
-    public static final ResourceKey<JukeboxSong> TEST_SONG_KEY = createSong("test_disc");
+    public static final Supplier<SoundEvent> TEST_DISC = registerSoundEvent("test_disc");
+    public static final ResourceKey<JukeboxSong> TEST_DISC_KEY = createSong("test_disc");
+    public static final Supplier<SoundEvent> SEWERCATS = registerSoundEvent("sewercats");
+    public static final ResourceKey<JukeboxSong> SEWERCATS_KEY = createSong("sewercats");
 
     private static ResourceKey<JukeboxSong> createSong(String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, name));

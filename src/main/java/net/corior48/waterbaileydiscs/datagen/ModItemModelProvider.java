@@ -3,6 +3,7 @@ package net.corior48.waterbaileydiscs.datagen;
 import net.corior48.waterbaileydiscs.WaterBaileyDiscs;
 import net.corior48.waterbaileydiscs.item.ModItems;
 import net.minecraft.data.PackOutput;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -14,5 +15,6 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(ModItems.TEST_DISC.get());
+        basicItem(ModItems.SEWERCATS.get());
     }
 }
