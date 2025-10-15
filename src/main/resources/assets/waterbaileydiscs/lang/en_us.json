@@ -16,5 +16,6 @@
   "item.waterbaileydiscs.copper_token": "Copper Carnival Token",
   "item.waterbaileydiscs.iron_token": "§eIron Carnival Token",
   "item.waterbaileydiscs.gold_token": "§bGolden Carnival Token",
-  "item.waterbaileydiscs.netherite_token": "§dNetherite Carnival Token"
+  "item.waterbaileydiscs.netherite_token": "§dNetherite Carnival Token",
+  "item.waterbaileydiscs.netherite_nugget": "Netherite Nugget"
 }

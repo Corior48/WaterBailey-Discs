@@ -34,17 +34,26 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> PRINTER = ITEMS.register("printer",
-            () -> new Item(new Item.Properties().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            () -> new Item(new Item.Properties().durability(9999999).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
     public static final DeferredItem<Item> PRIMOGEM = ITEMS.register("primogem",
-            () -> new Item(new Item.Properties().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+            () -> new Item(new Item.Properties().durability(9999999).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
     public static final DeferredItem<Item> COPPER_TOKEN = ITEMS.register("copper_token",
             () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> IRON_TOKEN = ITEMS.register("iron_token",
             () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> GOLD_TOKEN = ITEMS.register("gold_token",
             () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> NETHERITE_TOKEN = ITEMS.register("netherite_token",
             () -> new Item(new Item.Properties().component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    public static final DeferredItem<Item> NETHERITE_NUGGET = ITEMS.register("netherite_nugget",
+            () -> new Item(new Item.Properties()));
+
     public static final DeferredItem<Item> CREATIVE_DISCS_ICON = ITEMS.register("creative_discs_icon",
             () -> new Item(new Item.Properties()));
 

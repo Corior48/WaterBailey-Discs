@@ -35,6 +35,7 @@ public class ModCreativeModeTabs {
                 output.accept(IRON_TOKEN.get());
                 output.accept(GOLD_TOKEN.get());
                 output.accept(NETHERITE_TOKEN.get());
+                output.accept(NETHERITE_NUGGET.get());
             }).build());
 
  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> WATERBAILEY_DISCS = CREATIVE_MODE_TAB.register("waterbailey_discs", () -> CreativeModeTab.builder()

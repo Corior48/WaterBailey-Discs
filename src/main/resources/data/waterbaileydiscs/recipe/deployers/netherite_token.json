@@ -2,7 +2,7 @@
   "type": "create:deploying",
   "ingredients": [
     {
-      "item": "createdeco:netherite_nugget"
+      "item": "waterbaileydiscs:netherite_nugget"
     },
     {
       "item": "waterbaileydiscs:primogem"
