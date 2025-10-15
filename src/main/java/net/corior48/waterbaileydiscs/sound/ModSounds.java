@@ -18,8 +18,15 @@ public class ModSounds {
 
     public static final Supplier<SoundEvent> TEST_DISC = registerSoundEvent("test_disc");
     public static final ResourceKey<JukeboxSong> TEST_DISC_KEY = createSong("test_disc");
+
     public static final Supplier<SoundEvent> SEWERCATS = registerSoundEvent("sewercats");
     public static final ResourceKey<JukeboxSong> SEWERCATS_KEY = createSong("sewercats");
+
+    public static final Supplier<SoundEvent> ANGEL_HARE_SIDE_A = registerSoundEvent("angel_hare_side_a");
+    public static final ResourceKey<JukeboxSong> ANGEL_HARE_SIDE_A_KEY = createSong("angel_hare_side_a");
+
+    public static final Supplier<SoundEvent> OH_DESPAIR = registerSoundEvent("oh_despair");
+    public static final ResourceKey<JukeboxSong> OH_DESPAIR_KEY = createSong("oh_despair");
 
     private static ResourceKey<JukeboxSong> createSong(String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, name));

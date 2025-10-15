@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.angel_hare_side_a.desc"
+  },
+  "length_in_seconds": 1209.00,
+  "sound_event": "waterbaileydiscs:angel_hare_side_a"
+}

@@ -1,0 +1,34 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    },
+    {
+      "item": "waterbaileydiscs:iron_token"
+    }
+  ],
+  "results": [
+    {
+      "id": "waterbaileydiscs:gold_token"
+    }
+  ]
+}

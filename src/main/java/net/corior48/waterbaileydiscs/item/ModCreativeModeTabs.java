@@ -44,6 +44,8 @@ public class ModCreativeModeTabs {
             .displayItems((parameters, output) -> {
                 output.accept(TEST_DISC.get());
                 output.accept(SEWERCATS.get());
+                output.accept(ANGEL_HARE_SIDE_A.get());
+                output.accept(OH_DESPAIR.get());
             }).build());
 
 

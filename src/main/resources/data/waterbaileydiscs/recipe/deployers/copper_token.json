@@ -1,0 +1,17 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "create:copper_nugget"
+    },
+    {
+      "item": "waterbaileydiscs:primogem"
+    }
+  ],
+  "results": [
+    {
+      "count": 16,
+      "id": "waterbaileydiscs:copper_token"
+    }
+  ]
+}

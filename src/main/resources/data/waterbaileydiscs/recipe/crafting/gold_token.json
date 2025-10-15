@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "categroy": "misc",
+  "ingredients": [
+    {
+      "item": "waterbaileydiscs:netherite_token"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "waterbaileydiscs:gold_token"
+  }
+}

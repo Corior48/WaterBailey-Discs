@@ -16,5 +16,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(ModItems.TEST_DISC.get());
         basicItem(ModItems.SEWERCATS.get());
+        basicItem(ModItems.ANGEL_HARE_SIDE_A.get());
+        basicItem(ModItems.OH_DESPAIR.get());
     }
 }

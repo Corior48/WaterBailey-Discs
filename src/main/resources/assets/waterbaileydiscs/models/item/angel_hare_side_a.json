@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "waterbaileydiscs:item/angel_hare_side_a"
+  }
+}

@@ -14,5 +14,21 @@
         "stream": true
       }
     ]
-  }
+  },
+    "angel_hare_side_a": {
+      "sounds": [
+        {
+          "name": "waterbaileydiscs:angel_hare_side_a",
+          "stream": true
+        }
+      ]
+    },
+    "oh_despair": {
+      "sounds": [
+        {
+          "name": "waterbaileydiscs:oh_despair",
+          "stream": true
+        }
+      ]
+    }
 }
