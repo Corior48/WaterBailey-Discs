@@ -19,14 +19,32 @@ public class ModSounds {
     public static final Supplier<SoundEvent> TEST_DISC = registerSoundEvent("test_disc");
     public static final ResourceKey<JukeboxSong> TEST_DISC_KEY = createSong("test_disc");
 
-    public static final Supplier<SoundEvent> SEWERCATS = registerSoundEvent("sewercats");
-    public static final ResourceKey<JukeboxSong> SEWERCATS_KEY = createSong("sewercats");
+    public static final Supplier<SoundEvent> MEGALOVANIA_1 = registerSoundEvent("megalovania_1");
+    public static final ResourceKey<JukeboxSong> MEGALOVANIA_1_KEY = createSong("megalovania_1");
 
     public static final Supplier<SoundEvent> ANGEL_HARE_SIDE_A = registerSoundEvent("angel_hare_side_a");
     public static final ResourceKey<JukeboxSong> ANGEL_HARE_SIDE_A_KEY = createSong("angel_hare_side_a");
 
     public static final Supplier<SoundEvent> OH_DESPAIR = registerSoundEvent("oh_despair");
     public static final ResourceKey<JukeboxSong> OH_DESPAIR_KEY = createSong("oh_despair");
+
+    public static final Supplier<SoundEvent> VILLAGER_LULLABY = registerSoundEvent("villager_lullaby");
+    public static final ResourceKey<JukeboxSong> VILLAGER_LULLABY_KEY = createSong("villager_lullaby");
+
+    public static final Supplier<SoundEvent> JAKA_JAAN = registerSoundEvent("jaka_jaan");
+    public static final ResourceKey<JukeboxSong> JAKA_JAAN_KEY = createSong("jaka_jaan");
+
+    public static final Supplier<SoundEvent> JAKA_JAAN_ALTERNATIVE = registerSoundEvent("jaka_jaan_alternative");
+    public static final ResourceKey<JukeboxSong> JAKA_JAAN_ALTERNATIVE_KEY = createSong("jaka_jaan_alternative");
+
+    public static final Supplier<SoundEvent> AMONG_US_REMIX = registerSoundEvent("among_us_remix");
+    public static final ResourceKey<JukeboxSong> AMONG_US_REMIX_KEY = createSong("among_us_remix");
+
+    public static final Supplier<SoundEvent> GANGNAM_STYLE = registerSoundEvent("gangnam_style");
+    public static final ResourceKey<JukeboxSong> GANGNAM_STYLE_KEY = createSong("gangnam_style");
+
+    public static final Supplier<SoundEvent> A_MOTHERS_LOVE = registerSoundEvent("a_mothers_love");
+    public static final ResourceKey<JukeboxSong> A_MOTHERS_LOVE_KEY = createSong("a_mothers_love");
 
     private static ResourceKey<JukeboxSong> createSong(String name) {
         return ResourceKey.create(Registries.JUKEBOX_SONG, ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, name));

@@ -1,6 +1,7 @@
 package net.corior48.waterbaileydiscs.item;
 
 import net.corior48.waterbaileydiscs.WaterBaileyDiscs;
+import net.corior48.waterbaileydiscs.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,7 @@ public class ModCreativeModeTabs {
                 output.accept(GOLD_TOKEN.get());
                 output.accept(NETHERITE_TOKEN.get());
                 output.accept(NETHERITE_NUGGET.get());
+                output.accept(ModBlocks.MUSIC_BLOCK.get());
             }).build());
 
  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> WATERBAILEY_DISCS = CREATIVE_MODE_TAB.register("waterbailey_discs", () -> CreativeModeTab.builder()
@@ -44,9 +46,15 @@ public class ModCreativeModeTabs {
             .icon(() -> CREATIVE_DISCS_ICON.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(TEST_DISC.get());
-                output.accept(SEWERCATS.get());
                 output.accept(ANGEL_HARE_SIDE_A.get());
                 output.accept(OH_DESPAIR.get());
+                output.accept(VILLAGER_LULLABY.get());
+                output.accept(MEGALOVANIA_1.get());
+                output.accept(JAKA_JAAN.get());
+                output.accept(JAKA_JAAN_ALTERNATIVE.get());
+                output.accept(AMONG_US_REMIX.get());
+                output.accept(GANGNAM_STYLE.get());
+                output.accept(A_MOTHERS_LOVE.get());
             }).build());
 
 

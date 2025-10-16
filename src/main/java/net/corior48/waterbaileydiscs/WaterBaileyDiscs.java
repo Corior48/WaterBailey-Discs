@@ -1,5 +1,6 @@
 package net.corior48.waterbaileydiscs;
 
+import net.corior48.waterbaileydiscs.block.ModBlocks;
 import net.corior48.waterbaileydiscs.item.ModCreativeModeTabs;
 import net.corior48.waterbaileydiscs.item.ModItems;
 import net.corior48.waterbaileydiscs.sound.ModSounds;
@@ -81,6 +82,7 @@ public class WaterBaileyDiscs {
         NeoForge.EVENT_BUS.register(this);
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModSounds.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
 

@@ -7,14 +7,6 @@
       }
     ]
   },
-  "sewercats": {
-    "sounds": [
-      {
-        "name": "waterbaileydiscs:sewercats",
-        "stream": true
-      }
-    ]
-  },
     "angel_hare_side_a": {
       "sounds": [
         {
@@ -30,5 +22,61 @@
           "stream": true
         }
       ]
-    }
+    },
+  "villager_lullaby": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:villager_lullaby",
+        "stream": true
+      }
+    ]
+  },
+  "megalovania_1": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:megalovania_1",
+        "stream": true
+      }
+    ]
+  },
+  "jaka_jaan": {
+    "sounds":[
+      {
+        "name": "waterbaileydiscs:jaka_jaan",
+        "stream": true
+      }
+    ]
+  },
+  "jaka_jaan_alternative": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:jaka_jaan_alternative",
+        "stream": true
+      }
+    ]
+  },
+  "among_us_remix": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:among_us_remix",
+        "stream": true
+      }
+    ]
+  },
+  "gangnam_style": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:gangnam_style",
+        "stream": true
+      }
+    ]
+  },
+  "a_mothers_love": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:a_mothers_love",
+        "stream": true
+      }
+    ]
+  }
 }
