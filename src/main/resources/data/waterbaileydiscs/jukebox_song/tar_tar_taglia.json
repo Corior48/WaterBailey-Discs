@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.tar_tar_taglia.desc"
+  },
+  "length_in_seconds": 70.00,
+  "sound_event": "waterbaileydiscs:tar_tar_taglia"
+}

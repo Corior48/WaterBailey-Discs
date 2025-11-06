@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.kyles_mom.desc"
+  },
+  "length_in_seconds": 99.00,
+  "sound_event": "waterbaileydiscs:kyles_mom"
+}

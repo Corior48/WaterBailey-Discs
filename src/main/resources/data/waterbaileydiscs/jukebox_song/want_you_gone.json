@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.want_you_gone.desc"
+  },
+  "length_in_seconds": 143.00,
+  "sound_event": "waterbaileydiscs:want_you_gone"
+}

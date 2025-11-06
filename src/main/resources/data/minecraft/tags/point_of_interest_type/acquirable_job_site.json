@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "waterbaileydiscs:matt_poi_type",
+      "required": false
+    }
+  ]
+}

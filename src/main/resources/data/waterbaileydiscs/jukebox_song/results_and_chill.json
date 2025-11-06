@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.results_and_chill.desc"
+  },
+  "length_in_seconds": 188.00,
+  "sound_event": "waterbaileydiscs:results_and_chill"
+}

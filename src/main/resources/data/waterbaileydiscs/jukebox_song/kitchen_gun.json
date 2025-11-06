@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.kitchen_gun.desc"
+  },
+  "length_in_seconds": 185.00,
+  "sound_event": "waterbaileydiscs:kitchen_gun"
+}

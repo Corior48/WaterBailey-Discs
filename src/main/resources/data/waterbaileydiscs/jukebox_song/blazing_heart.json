@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.blazing_heart.desc"
+  },
+  "length_in_seconds": 177.00,
+  "sound_event": "waterbaileydiscs:blazing_heart"
+}

@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.nod_krai.desc"
+  },
+  "length_in_seconds": 213.00,
+  "sound_event": "waterbaileydiscs:nod_krai"
+}

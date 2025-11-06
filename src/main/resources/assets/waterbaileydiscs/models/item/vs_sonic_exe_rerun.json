@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "waterbaileydiscs:item/vs_sonic_exe_rerun"
+  }
+}
