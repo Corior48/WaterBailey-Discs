@@ -197,6 +197,18 @@ public class ModEvents {
                     new ItemCost(Items.EMERALD, 5),
                     Optional.of(new ItemCost(ModItems.BLANK_DISC, 1)),
                     new ItemStack(ModItems.NOD_KRAI.get(), 1), 1, 85, 0.05f));
+            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemCost(Items.EMERALD, 5),
+                    Optional.of(new ItemCost(ModItems.BLANK_DISC, 1)),
+                    new ItemStack(ModItems.HOUSE_OF_MIRRORS.get(), 1), 1, 85, 0.05f));
+            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemCost(Items.EMERALD, 5),
+                    Optional.of(new ItemCost(ModItems.BLANK_DISC, 1)),
+                    new ItemStack(ModItems.REVENGE.get(), 1), 1, 85, 0.05f));
+            trades.get(4).add((entity, randomSource) -> new MerchantOffer(
+                    new ItemCost(Items.EMERALD, 5),
+                    Optional.of(new ItemCost(ModItems.BLANK_DISC, 1)),
+                    new ItemStack(ModItems.DIGGY_DIGGY_HOLE.get(), 1), 1, 85, 0.05f));
         }
     }
 }
