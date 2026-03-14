@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/kyles_mom"
+    "layer0": "waterbaileydiscs:item/discs/kyles_mom"
   }
 }

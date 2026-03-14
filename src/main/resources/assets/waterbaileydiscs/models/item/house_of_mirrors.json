@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/house_of_mirrors"
+    "layer0": "waterbaileydiscs:item/discs/house_of_mirrors"
   }
 }

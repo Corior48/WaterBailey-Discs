@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/dont_mine_at_night"
+    "layer0": "waterbaileydiscs:item/discs/dont_mine_at_night"
   }
 }

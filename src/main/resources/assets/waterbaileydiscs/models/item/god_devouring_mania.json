@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/god_devouring_mania"
+    "layer0": "waterbaileydiscs:item/discs/god_devouring_mania"
   }
 }

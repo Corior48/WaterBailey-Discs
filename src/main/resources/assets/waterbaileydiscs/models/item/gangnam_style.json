@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/gangnam_style"
+    "layer0": "waterbaileydiscs:item/discs/gangnam_style"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/endless_encore"
+    "layer0": "waterbaileydiscs:item/discs/endless_encore"
   }
 }

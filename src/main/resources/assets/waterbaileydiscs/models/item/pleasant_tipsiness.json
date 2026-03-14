@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/pleasant_tipsiness"
+    "layer0": "waterbaileydiscs:item/discs/pleasant_tipsiness"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/summer_tropicala"
+    "layer0": "waterbaileydiscs:item/discs/summer_tropicala"
   }
 }

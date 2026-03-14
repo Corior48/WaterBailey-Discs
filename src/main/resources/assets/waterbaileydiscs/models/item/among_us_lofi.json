@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/among_us_lofi"
+    "layer0": "waterbaileydiscs:item/discs/among_us_lofi"
   }
 }

@@ -22,7 +22,7 @@
   "item.waterbaileydiscs.jaka_jaan_alternative.desc": "Zedd - Jaka Jaan (ALTERNATIVE)",
   "item.waterbaileydiscs.among_us_remix": "§bSussy Disc",
   "item.waterbaileydiscs.among_us_remix.desc": "Unknown - Among Us (Drip Remix)",
-  "item.waterbaileydiscs.a_mothers_love": "§bSussy Disc",
+  "item.waterbaileydiscs.a_mothers_love": "§bMusic Disc",
   "item.waterbaileydiscs.a_mothers_love.desc": "Team Undertale Yellow - A Mother's Love",
   "item.waterbaileydiscs.emberfire": "§bMusic Disc",
   "item.waterbaileydiscs.emberfire.desc": "HOYO-MIX/Curley Gao - Emberfire",
@@ -94,8 +94,5 @@
   "item.waterbaileydiscs.gold_token": "§bGolden Carnival Token",
   "item.waterbaileydiscs.netherite_token": "§dNetherite Carnival Token",
   "item.waterbaileydiscs.netherite_nugget": "Netherite Nugget",
-  "block.waterbaileydiscs.music_block": "Villager's Music Block",
-
-
-  "entity.minecraft.villager.waterbaileydiscs.musician": "Musician"
+  "block.waterbaileydiscs.music_block": "Disc Creator"
 }

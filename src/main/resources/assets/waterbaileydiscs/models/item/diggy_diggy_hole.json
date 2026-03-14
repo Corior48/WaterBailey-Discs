@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/diggy_diggy_hole"
+    "layer0": "waterbaileydiscs:item/discs/diggy_diggy_hole"
   }
 }

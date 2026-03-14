@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/never_gonna_give_you_up"
+    "layer0": "waterbaileydiscs:item/discs/never_gonna_give_you_up"
   }
 }

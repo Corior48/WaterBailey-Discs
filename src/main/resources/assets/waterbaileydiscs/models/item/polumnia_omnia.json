@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/polumnia_omnia"
+    "layer0": "waterbaileydiscs:item/discs/polumnia_omnia"
   }
 }

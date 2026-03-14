@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/furina_theme"
+    "layer0": "waterbaileydiscs:item/discs/furina_theme"
   }
 }

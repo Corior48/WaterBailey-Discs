@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/kitchen_gun"
+    "layer0": "waterbaileydiscs:item/discs/kitchen_gun"
   }
 }

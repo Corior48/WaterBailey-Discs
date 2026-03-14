@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/jaka_jaan_alternative"
+    "layer0": "waterbaileydiscs:item/discs/jaka_jaan_alternative"
   }
 }

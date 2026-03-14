@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/tar_tar_taglia"
+    "layer0": "waterbaileydiscs:item/discs/tar_tar_taglia"
   }
 }

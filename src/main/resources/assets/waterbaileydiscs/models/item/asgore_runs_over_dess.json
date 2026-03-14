@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/asgore_runs_over_dess"
+    "layer0": "waterbaileydiscs:item/discs/asgore_runs_over_dess"
   }
 }

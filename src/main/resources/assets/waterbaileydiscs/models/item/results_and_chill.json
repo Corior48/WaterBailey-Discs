@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "waterbaileydiscs:item/results_and_chill"
+    "layer0": "waterbaileydiscs:item/discs/results_and_chill"
   }
 }
