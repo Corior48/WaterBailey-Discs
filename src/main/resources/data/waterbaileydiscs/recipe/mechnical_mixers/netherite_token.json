@@ -1,0 +1,34 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    },
+    {
+      "item": "waterbaileydiscs:gold_token"
+    }
+  ],
+  "results": [
+    {
+      "id": "waterbaileydiscs:netherite_token"
+    }
+  ]
+}

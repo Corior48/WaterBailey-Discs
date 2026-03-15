@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.villager_lullaby.desc"
+  },
+  "length_in_seconds": 165.00,
+  "sound_event": "waterbaileydiscs:villager_lullaby"
+}

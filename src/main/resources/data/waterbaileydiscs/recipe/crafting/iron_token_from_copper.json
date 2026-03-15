@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CC "
+  ],
+  "key": {
+    "C": {
+      "item": "waterbaileydiscs:copper_token"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "waterbaileydiscs:iron_token"
+  }
+}

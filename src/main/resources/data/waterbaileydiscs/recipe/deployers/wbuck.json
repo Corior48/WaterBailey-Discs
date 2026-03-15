@@ -1,0 +1,17 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "waterbaileydiscs:printer"
+    }
+  ],
+  "results": [
+    {
+      "count": 16,
+      "id": "waterbaileydiscs:wbuck"
+    }
+  ]
+}

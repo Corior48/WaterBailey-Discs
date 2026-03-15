@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.house_of_mirrors.desc"
+  },
+  "length_in_seconds": 603.00,
+  "sound_event": "waterbaileydiscs:house_of_mirrors"
+}

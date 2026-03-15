@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.revenge.desc"
+  },
+  "length_in_seconds": 265.00,
+  "sound_event": "waterbaileydiscs:revenge"
+}

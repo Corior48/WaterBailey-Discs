@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.majin_forest_escape.desc"
+  },
+  "length_in_seconds": 181.00,
+  "sound_event": "waterbaileydiscs:majin_forest_escape"
+}

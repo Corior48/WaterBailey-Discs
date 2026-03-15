@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "WDW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "D": {
+      "item": "waterbaileydiscs:blank_disc"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "waterbaileydiscs:music_block"
+  }
+}

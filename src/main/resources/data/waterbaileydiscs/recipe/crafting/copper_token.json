@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "categroy": "misc",
+  "ingredients": [
+    {
+      "item": "waterbaileydiscs:iron_token"
+    }
+  ],
+  "result": {
+     "count": 8,
+    "id": "waterbaileydiscs:copper_token"
+    }
+}

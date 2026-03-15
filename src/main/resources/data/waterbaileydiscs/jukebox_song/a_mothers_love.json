@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "item.waterbaileydiscs.a_mothers_love.desc"
+  },
+  "length_in_seconds": 285.00,
+  "sound_event": "waterbaileydiscs:a_mothers_love"
+}
