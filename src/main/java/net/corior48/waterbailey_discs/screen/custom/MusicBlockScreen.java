@@ -1,14 +1,19 @@
 package net.corior48.waterbailey_discs.screen.custom;
 
+import net.corior48.waterbailey_discs.Config;
 import net.corior48.waterbailey_discs.WaterBaileyDiscs;
+import net.corior48.waterbailey_discs.utils.DiscLyrics;
 import net.corior48.waterbailey_discs.utils.DiscOptions;
 import net.corior48.waterbailey_discs.utils.DiscSearchHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.event.KeyEvent;
@@ -26,6 +31,19 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
     private boolean badgeAnimating = false;
     private boolean lastHadBlankDisc = false;
     private DiscOptions.DiscCategory lastAnimatedCategory = DiscOptions.DiscCategory.ALL;
+
+
+    private boolean lyricsPanelOpen = false;
+    private int lyricsScrollOffset = 0;
+    private static final int LYRICS_PANEL_WIDTH = 130;
+    private static final int LYRICS_PANEL_HEIGHT = 96;
+    private static final int LYRICS_BUTTON_WIDTH = 40;
+    private static final int LYRICS_BUTTON_HEIGHT = 16;
+
+    private float lyricsButtonAnim = 0.0F; // 0 = hidden, 1 = fully open
+    private int lastLyricsSelected = -1;
+    private boolean lastLyricsAvailable = false;
+
 
     private void startBadgeAnimation() {
         this.badgeAnimStartTime = System.currentTimeMillis();
@@ -66,10 +84,12 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
 
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, "textures/gui/music_block.png");
+    private static final ResourceLocation LYRICS_BUTTON_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("waterbaileydiscs", "textures/gui/lyrics_button.png");
 
     public MusicBlockScreen(MusicBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageWidth = 176;
+        this.imageWidth = 196;
         this.imageHeight = 166;
         this.inventoryLabelY = this.imageHeight - 94;
     }
@@ -148,6 +168,14 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
                 label = "No matching discs";
             } else {
                 int selected = this.menu.getSelectedRecord();
+                if (selected >= 0 && selected < DiscOptions.size()) {
+                    Item selectedItem = DiscOptions.get(selected);
+
+                    if (DiscLyrics.hasLyrics(selectedItem)) {
+                        DiscLyrics.LyricEntry entry = DiscLyrics.getLyrics(selectedItem);
+                        // draw entry.lines()
+                    }
+                }
 
                 if (!this.filteredIndexes.contains(selected)) {
                     this.filteredSelection = 0;
@@ -159,6 +187,16 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
                 label = DiscSearchHelper.getDisplayDescription(new ItemStack(DiscOptions.get(selected)));
             }
         }
+        int selected = this.menu.getSelectedRecord();
+        if (selected != this.lastLyricsSelected) {
+            this.lastLyricsSelected = selected;
+            this.lyricsScrollOffset = 0;
+
+            if (!selectedDiscHasLyrics()) {
+                this.lyricsPanelOpen = false;
+            }
+        }
+
         int dropdownX = this.leftPos + 108;
         int dropdownY = this.topPos + 6;
         int dropdownWidth = 60;
@@ -187,7 +225,36 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             guiGraphics.fill(nameX, baseY, nameX + 104, baseY + 16, 0x88000000);
             guiGraphics.fill(rightArrowX, baseY, rightArrowX + 16, baseY + 16, 0x88000000);
         }
-        int selected = this.menu.getSelectedRecord();
+
+        //Render LyricButton
+        if (this.lyricsButtonAnim > 0.0F) {
+            renderLyricsButton(guiGraphics);
+        }
+    }
+
+    private int getLyricsButtonX() {
+        return this.leftPos + this.imageWidth - 23;
+    }
+
+    private int getLyricsButtonY() {
+        return this.topPos + 5;
+    }
+
+    private void updateLyricsButtonAnimation() {
+        boolean hasLyrics = Config.SHOW_LYRICS.get()
+                && Config.SHOW_LYRICS_BUTTON.get()
+                && this.menu.hasBlankDisc()
+                && selectedDiscHasLyrics();
+
+        float speed = 0.12F;
+
+        if (hasLyrics) {
+            this.lyricsButtonAnim = Math.min(1.0F, this.lyricsButtonAnim + speed);
+        } else {
+            this.lyricsButtonAnim = Math.max(0.0F, this.lyricsButtonAnim - speed);
+        }
+
+        this.lastLyricsAvailable = hasLyrics;
     }
 
 
@@ -236,6 +303,8 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             this.categoryDropdownOpen = false;
         }
 
+
+
         int baseY = this.topPos + 54;
         int leftArrowX = this.leftPos + 10;
         int rightArrowX = this.leftPos + 142;
@@ -258,7 +327,62 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             return true;
         }
 
+        int lyricsButtonX = getLyricsButtonX();
+        int lyricsButtonY = getLyricsButtonY();
+        int visibleLyricsWidth = Math.max(1, (int) (LYRICS_BUTTON_WIDTH * easeOutCubic(this.lyricsButtonAnim)));
+
+        if (this.lyricsButtonAnim > 0.0F
+                && mouseX >= lyricsButtonX && mouseX < lyricsButtonX + visibleLyricsWidth
+                && mouseY >= lyricsButtonY && mouseY < lyricsButtonY + LYRICS_BUTTON_HEIGHT) {
+
+            int selected = this.menu.getSelectedRecord();
+
+            if (!Config.SHOW_LYRICS.get()) {
+                return true;
+            }
+
+            if (selected >= 0 && selected < DiscOptions.size() && this.minecraft != null) {
+                this.minecraft.setScreen(new LyricsPopupScreen(this, DiscOptions.get(selected)));
+                return true;
+            }
+        }
+
         return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        if (!this.lyricsPanelOpen || !selectedDiscHasLyrics()) {
+            return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        }
+
+        int selected = this.menu.getSelectedRecord();
+        var item = DiscOptions.get(selected);
+        DiscLyrics.LyricEntry entry = DiscLyrics.getLyrics(item);
+
+        int panelX = this.leftPos + this.imageWidth + 4;
+        int panelY = this.topPos + 8;
+        int panelWidth = LYRICS_PANEL_WIDTH;
+        int panelHeight = LYRICS_PANEL_HEIGHT;
+
+        boolean overPanel = mouseX >= panelX && mouseX < panelX + panelWidth
+                && mouseY >= panelY && mouseY < panelY + panelHeight;
+
+        if (!overPanel) {
+            return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        }
+
+        int lineHeight = 10;
+        int visibleLines = (panelHeight - 20) / lineHeight;
+        int maxOffset = Math.max(0, entry.lines().size() - visibleLines);
+
+        if (scrollY > 0) {
+            this.lyricsScrollOffset = Math.max(0, this.lyricsScrollOffset - 1);
+        } else if (scrollY < 0) {
+            this.lyricsScrollOffset = Math.min(maxOffset, this.lyricsScrollOffset + 1);
+        }
+
+        return true;
     }
 
     private void rebuildFilteredList() {
@@ -305,6 +429,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
     @Override
     protected void init() {
         super.init();
+        DiscLyrics.loadAll();
 
         this.searchBox = new EditBox(this.font, this.leftPos + 8, this.topPos + 6, 96, 16, Component.literal("Search Discs"));
         this.searchBox.setMaxLength(50);
@@ -312,6 +437,29 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         this.addRenderableWidget(this.searchBox);
 
         rebuildFilteredList();
+
+        this.addRenderableWidget(new ConfigButton(
+                this.leftPos + this.imageWidth - 23,
+                this.topPos + 141,
+                16,
+                16,
+                Component.literal("⚙"),
+                button -> {
+                    if (this.minecraft != null) {
+                        this.minecraft.setScreen(new ConfigScreen(this));
+                    }
+                }
+        ));
+    }
+
+
+    private boolean selectedDiscHasLyrics() {
+        int selected = this.menu.getSelectedRecord();
+        if (selected < 0 || selected >= DiscOptions.size()) {
+            return false;
+        }
+
+        return DiscLyrics.hasLyrics(DiscOptions.get(selected));
     }
 
     @Override
@@ -320,6 +468,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         super.render(graphics, mouseX, mouseY, partialTick);
 
         updateBadgeAnimationTriggers();
+        updateLyricsButtonAnimation();
 
         renderAnimatedCostBadge(graphics);
         renderCategoryDropdown(graphics, mouseX, mouseY);
@@ -415,7 +564,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         List<DiscOptions.DiscCategory> values = DiscOptions.getAvailableCategories();
 
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 300);
+        guiGraphics.pose().translate(0, 0, 500);
 
         for (int i = 0; i < values.size(); i++) {
             int rowY = dropdownY + rowHeight + (i * rowHeight);
@@ -439,6 +588,41 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             );
         }
 
+        guiGraphics.flush();
         guiGraphics.pose().popPose();
+    }
+    private void renderLyricsButton(GuiGraphics guiGraphics) {
+        if (this.lyricsButtonAnim <= 0.0F) {
+            return;
+        }
+
+        float eased = easeOutCubic(this.lyricsButtonAnim);
+        int visibleWidth = Math.max(1, (int) (LYRICS_BUTTON_WIDTH * eased));
+
+        int buttonX = getLyricsButtonX();
+        int buttonY = getLyricsButtonY();
+
+        guiGraphics.blit(
+                LYRICS_BUTTON_TEXTURE,
+                buttonX,
+                buttonY,
+                0,
+                0,
+                visibleWidth,
+                LYRICS_BUTTON_HEIGHT,
+                LYRICS_BUTTON_WIDTH,
+                LYRICS_BUTTON_HEIGHT
+        );
+
+        if (visibleWidth >= 20) {
+            guiGraphics.drawString(
+                    this.font,
+                    "Lyrics",
+                    buttonX + 5,
+                    buttonY + 4,
+                    0xFFFFFFFF,
+                    false
+            );
+        }
     }
 }

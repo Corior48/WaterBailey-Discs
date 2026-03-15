@@ -9,6 +9,7 @@ import net.corior48.waterbailey_discs.sound.ModSounds;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -27,6 +28,7 @@ public class WaterBaileyDiscs {
         ModCreativeModeTabs.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.MENUS.register(modEventBus);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
 }
 

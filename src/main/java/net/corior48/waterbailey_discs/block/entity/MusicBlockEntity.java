@@ -3,6 +3,8 @@ package net.corior48.waterbailey_discs.block.entity;
 import net.corior48.waterbailey_discs.item.ModItems;
 import net.corior48.waterbailey_discs.utils.DiscOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -75,5 +77,25 @@ public class MusicBlockEntity extends BlockEntity {
             updateOutput();
             setChanged();
         }
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+
+        tag.put("inventory", this.items.serializeNBT(registries));
+        tag.putInt("selected_record", this.selectedRecord);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+
+        if (tag.contains("inventory")) {
+            this.items.deserializeNBT(registries, tag.getCompound("inventory"));
+        }
+
+        this.selectedRecord = tag.getInt("selected_record");
+        updateOutput();
     }
 }

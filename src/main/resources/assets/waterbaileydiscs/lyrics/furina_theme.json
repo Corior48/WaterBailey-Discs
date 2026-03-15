@@ -1,0 +1,13 @@
+{
+  "item": "waterbaileydiscs:furina_theme",
+  "title": "§0Se Mettre Sur Son Trente-Et-Un !",
+  "texture": "furina_theme",
+  "font": "waterbaileydiscs:genshin_font",
+  "lines":   [
+    "Le monde n'est qu'une scène",
+    "Il vaut mieux rire que pleurer",
+    "Car le rire est le propre de l'homme",
+    "Riez de tout cela, ne vous inquiétez pas",
+    "Profitons d'aujourd'hui"
+  ]
+}

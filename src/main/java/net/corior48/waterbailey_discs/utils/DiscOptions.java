@@ -75,6 +75,7 @@ public class DiscOptions {
                 add(discs, ModItems.MAJIN_FOREST_ESCAPE.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
                 add(discs, ModItems.KITCHEN_GUN.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
                 add(discs, ModItems.NEVER_GONNA_GIVE_YOU_UP.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
+                add(discs, ModItems.OH_DESPAIR.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
                 add(discs, ModItems.REVENGE.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
                 add(discs, ModItems.RESULTS_AND_CHILL.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
                 add(discs, ModItems.STILL_ALIVE.get(), DiscCategory.WATERFALL_X_BAILEY, 5);
