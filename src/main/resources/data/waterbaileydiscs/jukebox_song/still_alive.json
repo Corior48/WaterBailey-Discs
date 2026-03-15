@@ -1,8 +1,0 @@
-{
-  "comparator_output": 15,
-  "description": {
-    "translate": "item.waterbaileydiscs.still_alive.desc"
-  },
-  "length_in_seconds": 184.00,
-  "sound_event": "waterbaileydiscs:still_alive"
-}

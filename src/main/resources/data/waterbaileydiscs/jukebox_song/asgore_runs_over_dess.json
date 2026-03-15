@@ -1,8 +1,0 @@
-{
-  "comparator_output": 15,
-  "description": {
-    "translate": "item.waterbaileydiscs.asgore_runs_over_dess.desc"
-  },
-  "length_in_seconds": 155.00,
-  "sound_event": "waterbaileydiscs:asgore_runs_over_dess"
-}

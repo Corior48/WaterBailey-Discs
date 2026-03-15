@@ -1,8 +1,0 @@
-{
-  "comparator_output": 15,
-  "description": {
-    "translate": "item.waterbaileydiscs.endless_encore.desc"
-  },
-  "length_in_seconds": 156.00,
-  "sound_event": "waterbaileydiscs:endless_encore"
-}

@@ -1,8 +1,0 @@
-{
-  "comparator_output": 15,
-  "description": {
-    "translate": "item.waterbaileydiscs.megalovania_1.desc"
-  },
-  "length_in_seconds": 200.0,
-  "sound_event": "waterbaileydiscs:megalovania_1"
-}
