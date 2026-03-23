@@ -19,72 +19,78 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.minecraft.util.Mth.lerpInt;
+
 public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
-    private boolean categoryDropdownOpen = false;
-    private DiscCatalog.DiscCategory activeCategory = DiscCatalog.DiscCategory.ALL;
-    private EditBox searchBox;
-    private final List<Integer> filteredIndexes = new ArrayList<>();
-    private int filteredSelection = 0;
-    private int displayedCost = 0;
-    private long badgeAnimStartTime = 0L;
-    private boolean badgeAnimating = false;
-    private boolean lastHadBlankDisc = false;
-    private DiscCatalog.DiscCategory lastAnimatedCategory = DiscCatalog.DiscCategory.ALL;
 
+    // =========================================================
+    // Textures / static UI constants
+    // =========================================================
 
-    private boolean lyricsPanelOpen = false;
-    private int lyricsScrollOffset = 0;
+    private static final ResourceLocation TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, "textures/gui/music_block.png");
+
+    private static final ResourceLocation LYRICS_BUTTON_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("waterbaileydiscs", "textures/gui/lyrics_button.png");
+
     private static final int LYRICS_PANEL_WIDTH = 130;
     private static final int LYRICS_PANEL_HEIGHT = 96;
     private static final int LYRICS_BUTTON_WIDTH = 40;
     private static final int LYRICS_BUTTON_HEIGHT = 16;
 
+    private static final float CATEGORY_TEXT_SCALE = 0.75f;
+    private static final int CATEGORY_TAB_PADDING = 10;
+    private static final int CATEGORY_TAB_HEIGHT = 11;
+    private static final int CATEGORY_TAB_SPACING = 2;
+    private static final int CATEGORY_BAR_X_OFFSET = -6;
+
+    // =========================================================
+    // General screen state
+    // =========================================================
+
+    private EditBox searchBox;
+    private int displayedCost = 0;
+
+    // =========================================================
+    // Disc filtering / selection state
+    // =========================================================
+
+    private final List<Integer> filteredIndexes = new ArrayList<>();
+    private int filteredSelection = 0;
+
+    // =========================================================
+    // Category bar state
+    // =========================================================
+
+    private boolean categoryBarVisible = false;
+    private int categoryBarHideTicks = 0;
+    private float categoryBarAnim = 0.0f;
+
+    private DiscCatalog.DiscCategory activeCategory = DiscCatalog.DiscCategory.ALL;
+    private DiscCatalog.HardcoreSubCategory activeHardcoreSubCategory = DiscCatalog.HardcoreSubCategory.ALL;
+    private DiscCatalog.DiscCategory lastAnimatedCategory = DiscCatalog.DiscCategory.ALL;
+
+    // =========================================================
+    // XP badge animation state
+    // =========================================================
+
+    private long badgeAnimStartTime = 0L;
+    private boolean badgeAnimating = false;
+    private boolean lastHadBlankDisc = false;
+
+    // =========================================================
+    // Lyrics UI state
+    // =========================================================
+
+    private boolean lyricsPanelOpen = false;
+    private int lyricsScrollOffset = 0;
     private float lyricsButtonAnim = 0.0F; // 0 = hidden, 1 = fully open
     private int lastLyricsSelected = -1;
     private boolean lastLyricsAvailable = false;
 
-
-    private void startBadgeAnimation() {
-        this.badgeAnimStartTime = System.currentTimeMillis();
-        this.badgeAnimating = true;
-    }
-
-    private void updateBadgeAnimationTriggers() {
-        boolean hasBlankDisc = this.menu.hasBlankDisc();
-
-        // animate when a blank disc is newly inserted
-        if (hasBlankDisc && !this.lastHadBlankDisc) {
-            startBadgeAnimation();
-        }
-
-        // animate when category changes while a blank disc is present
-        if (hasBlankDisc && this.activeCategory != this.lastAnimatedCategory) {
-            startBadgeAnimation();
-        }
-
-        this.lastHadBlankDisc = hasBlankDisc;
-        this.lastAnimatedCategory = this.activeCategory;
-    }
-
-    private boolean isMouseOverDropdown(int mouseX, int mouseY) {
-        if (!this.categoryDropdownOpen) {
-            return false;
-        }
-
-        int dropdownX = this.leftPos + 108;
-        int dropdownY = this.topPos + 6;
-        int dropdownListWidth = 110;
-        int rowHeight = 16;
-        int totalHeight = rowHeight * (DiscCatalog.DiscCategory.values().length + 1);
-
-        return mouseX >= dropdownX && mouseX < dropdownX + dropdownListWidth
-                && mouseY >= dropdownY && mouseY < dropdownY + totalHeight;
-    }
-
-    private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, "textures/gui/music_block.png");
-    private static final ResourceLocation LYRICS_BUTTON_TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("waterbaileydiscs", "textures/gui/lyrics_button.png");
+    // =========================================================
+    // Construction / initialization
+    // =========================================================
 
     public MusicBlockScreen(MusicBlockMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
@@ -93,99 +99,61 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
-    private float easeOutCubic(float t) {
-        return 1.0F - (float)Math.pow(1.0F - t, 3.0);
+    @Override
+    protected void init() {
+        super.init();
+        DiscLyrics.loadAll();
+
+        // Search box for filtering visible discs by name / query
+        this.searchBox = new EditBox(this.font, this.leftPos + 8, this.topPos + 6, 96, 16, Component.literal("Search Discs"));
+        this.searchBox.setMaxLength(50);
+        this.searchBox.setResponder(value -> rebuildFilteredList());
+        this.addRenderableWidget(this.searchBox);
+
+        // Build the first filtered result list after screen setup
+        rebuildFilteredList();
+
+        // Config button opens the mod config screen from this GUI
+        this.addRenderableWidget(new ConfigButton(
+                this.leftPos + this.imageWidth - 23,
+                this.topPos + 141,
+                16,
+                16,
+                Component.literal("⚙"),
+                button -> {
+                    if (this.minecraft != null) {
+                        this.minecraft.setScreen(new ConfigScreen(this));
+                    }
+                }
+        ));
     }
 
-    private void renderAnimatedCostBadge(GuiGraphics guiGraphics) {
-        if (this.categoryDropdownOpen) {
-            return;
-        }
-
-        int selected = this.menu.getSelectedRecord();
-
-        if (!this.menu.hasBlankDisc()
-                || selected < 0
-                || selected >= DiscCatalog.size()
-                || this.minecraft == null
-                || this.minecraft.player == null) {
-            return;
-        }
-
-        int xpCost = DiscCatalog.getXpCost(selected);
-        boolean canAfford = this.minecraft.player.isCreative() || this.minecraft.player.experienceLevel >= xpCost;
-
-        String xpLabel = xpCost + "L";
-        int textColor = canAfford ? 0xFF80FF20 : 0xFFFF6060;
-
-        int badgeHeight = 12;
-        int fullWidth = 36;
-        int animatedWidth = fullWidth;
-
-        int drawX = this.leftPos + 133;
-        int drawY = this.topPos + 24;
-
-        if (this.badgeAnimating) {
-            float durationMs = 550.0F;
-            float rawT = (System.currentTimeMillis() - this.badgeAnimStartTime) / durationMs;
-
-            if (rawT >= 1.0F) {
-                rawT = 1.0F;
-                this.badgeAnimating = false;
-            }
-
-            float t = easeOutCubic(rawT);
-            animatedWidth = Math.max(8, (int)(fullWidth * (0.4F + 0.6F * t)));
-        }
-
-        guiGraphics.fill(drawX, drawY, drawX + animatedWidth, drawY + badgeHeight, 0xFF2B2B2B);
-
-        int textWidth = this.font.width(xpLabel);
-        int textX = drawX + (animatedWidth / 2) - (textWidth / 2);
-        int textY = drawY + 2;
-
-        guiGraphics.drawString(this.font, xpLabel, textX, textY, textColor, false);
-    }
+    // =========================================================
+    // Main rendering lifecycle
+    // =========================================================
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTicks, int mouseX, int mouseY) {
+        // Draw the base GUI texture
         guiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+
+        // Main selector row positions
         int baseY = this.topPos + 54;
         int leftArrowX = this.leftPos + 10;
         int nameX = this.leftPos + 34;
         int rightArrowX = this.leftPos + 142;
 
+        // Left arrow button
         guiGraphics.fill(leftArrowX, baseY, leftArrowX + 16, baseY + 16, 0xFF555555);
         guiGraphics.drawString(this.font, "<", leftArrowX + 5, baseY + 4, 0xFFFFFFFF, false);
 
+        // Center name/display box
         guiGraphics.fill(nameX, baseY, nameX + 104, baseY + 16, 0xFF333333);
 
-        String label = "Insert Blank Disc";
+        // Default label shown when no valid disc can be displayed
+        String label = getCurrentDiscLabel();
 
-        if (this.menu.hasBlankDisc()) {
-            if (this.filteredIndexes.isEmpty()) {
-                label = "No matching discs";
-            } else {
-                int selected = this.menu.getSelectedRecord();
-                if (selected >= 0 && selected < DiscCatalog.size()) {
-                    Item selectedItem = DiscCatalog.get(selected);
-
-                    if (DiscLyrics.hasLyrics(selectedItem)) {
-                        DiscLyrics.LyricEntry entry = DiscLyrics.getLyrics(selectedItem);
-                        // draw entry.lines()
-                    }
-                }
-
-                if (!this.filteredIndexes.contains(selected)) {
-                    this.filteredSelection = 0;
-                    selected = this.filteredIndexes.get(0);
-                } else {
-                    this.filteredSelection = this.filteredIndexes.indexOf(selected);
-                }
-
-                label = DiscSearchHelper.getDisplayDescription(new ItemStack(DiscCatalog.get(selected)));
-            }
-        }
+        // Reset lyrics scroll when the selected disc changes
         int selected = this.menu.getSelectedRecord();
         if (selected != this.lastLyricsSelected) {
             this.lastLyricsSelected = selected;
@@ -196,122 +164,97 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             }
         }
 
-        int dropdownX = this.leftPos + 108;
-        int dropdownY = this.topPos + 6;
-        int dropdownWidth = 60;
-        int dropdownListWidth = 110;
-        int rowHeight = 16;
-
-        guiGraphics.fill(dropdownX, dropdownY, dropdownX + dropdownWidth, dropdownY + rowHeight, 0xFF000000);
-
-        String buttonText = this.activeCategory.getDisplayName();
-        String arrowText = "▼";
-
-// draw category text
-        drawScrollingClippedText(guiGraphics, buttonText, dropdownX, dropdownY, dropdownWidth - 10, 0xFFFFFFFF);
-
-// draw dropdown arrow on the far right
-        guiGraphics.drawString(this.font, arrowText, dropdownX + dropdownWidth - 10, dropdownY + 4, 0xFFFFFFFF, false);
-
-
+        // Draw the disc label, using scrolling text if too wide
         drawScrollingClippedText(guiGraphics, label, nameX, baseY, 104, 0xFFFFFFFF);
 
+        // Right arrow button
         guiGraphics.fill(rightArrowX, baseY, rightArrowX + 16, baseY + 16, 0xFF555555);
         guiGraphics.drawString(this.font, ">", rightArrowX + 5, baseY + 4, 0xFFFFFFFF, false);
 
+        // Gray out selector controls if a blank disc is not present
         if (!this.menu.hasBlankDisc()) {
             guiGraphics.fill(leftArrowX, baseY, leftArrowX + 16, baseY + 16, 0x88000000);
             guiGraphics.fill(nameX, baseY, nameX + 104, baseY + 16, 0x88000000);
             guiGraphics.fill(rightArrowX, baseY, rightArrowX + 16, baseY + 16, 0x88000000);
         }
 
-        //Render LyricButton
+        // Draw the animated lyrics button when visible
         if (this.lyricsButtonAnim > 0.0F) {
             renderLyricsButton(guiGraphics);
         }
     }
 
-    private int getLyricsButtonX() {
-        return this.leftPos + this.imageWidth - 23;
-    }
+    @Override
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics, mouseX, mouseY, partialTick);
 
-    private int getLyricsButtonY() {
-        return this.topPos + 5;
-    }
+        // Update animation triggers that depend on current selection / insert state
+        updateBadgeAnimationTriggers();
+        updateLyricsButtonAnimation();
 
-    private void updateLyricsButtonAnimation() {
-        boolean hasLyrics = ModClientConfig.SHOW_LYRICS.get()
-                && ModClientConfig.SHOW_LYRICS_BUTTON.get()
-                && this.menu.hasBlankDisc()
-                && selectedDiscHasLyrics();
-
-        float speed = 0.12F;
-
-        if (hasLyrics) {
-            this.lyricsButtonAnim = Math.min(1.0F, this.lyricsButtonAnim + speed);
-        } else {
-            this.lyricsButtonAnim = Math.max(0.0F, this.lyricsButtonAnim - speed);
+        // Keep category bar visible while hovered, then allow it to fade away
+        if (isHoveringCategoryArea(mouseX, mouseY)) {
+            this.categoryBarHideTicks = 14;
+        } else if (this.categoryBarHideTicks > 0) {
+            this.categoryBarHideTicks--;
         }
 
-        this.lastLyricsAvailable = hasLyrics;
+        this.categoryBarVisible = this.categoryBarHideTicks > 0;
+
+        // Animate category bar open / closed state
+        float animSpeed = 0.15f;
+        if (this.categoryBarVisible) {
+            this.categoryBarAnim = Math.min(1.0f, this.categoryBarAnim + animSpeed);
+        } else {
+            this.categoryBarAnim = Math.max(0.0f, this.categoryBarAnim - animSpeed);
+        }
+
+        // Overlay UI pieces rendered after the base container
+        renderAnimatedCostBadge(graphics);
+        renderCategoryBar(graphics, mouseX, mouseY);
+
+        int baseY = this.topPos + 54;
+        int nameX = this.leftPos + 34;
+        int nameWidth = 104;
+        int nameHeight = 16;
+
+        //Disc label tooltip
+        if (mouseX >= nameX && mouseX < nameX + nameWidth
+                && mouseY >= baseY && mouseY < baseY + nameHeight) {
+            graphics.renderTooltip(this.font, Component.literal(getCurrentDiscLabel()), mouseX, mouseY);
+        }
+
+        this.renderTooltip(graphics, mouseX, mouseY);
     }
 
+    // =========================================================
+    // Mouse / keyboard input handling
+    // =========================================================
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-
-        int dropdownX = this.leftPos + 108;
-        int dropdownY = this.topPos + 6;
-        int dropdownWidth = 60;
-        int dropdownListWidth = 110;
-        int rowHeight = 16;
-
-        if (mouseX >= dropdownX && mouseX < dropdownX + dropdownWidth
-                && mouseY >= dropdownY && mouseY < dropdownY + rowHeight) {
-            this.categoryDropdownOpen = !this.categoryDropdownOpen;
-            return true;
-        }
-
+        // Focus/unfocus search box based on click position
         if (this.searchBox != null) {
             boolean clickedSearch = this.searchBox.isMouseOver(mouseX, mouseY);
             this.searchBox.setFocused(clickedSearch);
         }
 
-        if (this.categoryDropdownOpen) {
-            int totalHeight = rowHeight * (DiscCatalog.DiscCategory.values().length + 1);
-
-            List<DiscCatalog.DiscCategory> values = DiscCatalog.getAvailableCategories();
-
-            for (int i = 0; i < values.size(); i++) {
-                int rowY = dropdownY + rowHeight + (i * rowHeight);
-
-                if (mouseX >= dropdownX && mouseX < dropdownX + dropdownListWidth
-                        && mouseY >= rowY && mouseY < rowY + rowHeight) {
-
-                    this.activeCategory = values.get(i);
-                    this.categoryDropdownOpen = false;
-                    rebuildFilteredList();
-                    return true;
-                }
-            }
-
-            if (isMouseOverDropdown((int) mouseX, (int) mouseY)) {
-                return true;
-            }
-
-            this.categoryDropdownOpen = false;
+        // Category bar handles its own click routing
+        if (handleCategoryBarClick(mouseX, mouseY)) {
+            return true;
         }
-
-
 
         int baseY = this.topPos + 54;
         int leftArrowX = this.leftPos + 10;
         int rightArrowX = this.leftPos + 142;
 
+        // If there is nothing selectable, fall back to normal behavior
         if (!this.menu.hasBlankDisc() || this.filteredIndexes.isEmpty()) {
             return super.mouseClicked(mouseX, mouseY, button);
         }
 
+        // Left arrow: move to previous filtered disc
         if (mouseX >= leftArrowX && mouseX < leftArrowX + 16 && mouseY >= baseY && mouseY < baseY + 16) {
             this.filteredSelection = (this.filteredSelection - 1 + this.filteredIndexes.size()) % this.filteredIndexes.size();
             int realIndex = this.filteredIndexes.get(this.filteredSelection);
@@ -319,6 +262,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             return true;
         }
 
+        // Right arrow: move to next filtered disc
         if (mouseX >= rightArrowX && mouseX < rightArrowX + 16 && mouseY >= baseY && mouseY < baseY + 16) {
             this.filteredSelection = (this.filteredSelection + 1) % this.filteredIndexes.size();
             int realIndex = this.filteredIndexes.get(this.filteredSelection);
@@ -326,6 +270,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             return true;
         }
 
+        // Lyrics button click handling
         int lyricsButtonX = getLyricsButtonX();
         int lyricsButtonY = getLyricsButtonY();
         int visibleLyricsWidth = Math.max(1, (int) (LYRICS_BUTTON_WIDTH * easeOutCubic(this.lyricsButtonAnim)));
@@ -351,6 +296,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        // Only process lyric scrolling if the lyrics panel is currently open and valid
         if (!this.lyricsPanelOpen || !selectedDiscHasLyrics()) {
             return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
         }
@@ -384,141 +330,9 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         return true;
     }
 
-    private void rebuildFilteredList() {
-
-        if (!DiscCatalog.getAvailableCategories().contains(this.activeCategory)) {
-            this.activeCategory = DiscCatalog.DiscCategory.ALL;
-        }
-
-        this.filteredIndexes.clear();
-
-        String query = this.searchBox == null ? "" : this.searchBox.getValue().toLowerCase(java.util.Locale.ROOT).trim();
-
-        for (int i = 0; i < DiscCatalog.size(); i++) {
-            ItemStack stack = new ItemStack(DiscCatalog.get(i));
-
-            boolean matchesCategory = DiscCatalog.matchesCategory(i, this.activeCategory);
-            boolean matchesSearch = query.isEmpty() || DiscSearchHelper.matchesQuery(stack, query);
-
-            if (matchesCategory && matchesSearch) {
-                this.filteredIndexes.add(i);
-            }
-        }
-
-        if (this.filteredIndexes.isEmpty()) {
-            this.filteredSelection = 0;
-            return;
-        }
-
-        int currentSelected = this.menu.getSelectedRecord();
-        int foundIndex = this.filteredIndexes.indexOf(currentSelected);
-
-        if (foundIndex >= 0) {
-            this.filteredSelection = foundIndex;
-        } else {
-            this.filteredSelection = 0;
-        }
-
-        if (this.menu.hasBlankDisc() && this.minecraft != null && this.minecraft.gameMode != null) {
-            int realIndex = this.filteredIndexes.get(this.filteredSelection);
-            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, realIndex + 1000);
-        }
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        DiscLyrics.loadAll();
-
-        this.searchBox = new EditBox(this.font, this.leftPos + 8, this.topPos + 6, 96, 16, Component.literal("Search Discs"));
-        this.searchBox.setMaxLength(50);
-        this.searchBox.setResponder(value -> rebuildFilteredList());
-        this.addRenderableWidget(this.searchBox);
-
-        rebuildFilteredList();
-
-        this.addRenderableWidget(new ConfigButton(
-                this.leftPos + this.imageWidth - 23,
-                this.topPos + 141,
-                16,
-                16,
-                Component.literal("⚙"),
-                button -> {
-                    if (this.minecraft != null) {
-                        this.minecraft.setScreen(new ConfigScreen(this));
-                    }
-                }
-        ));
-    }
-
-
-    private boolean selectedDiscHasLyrics() {
-        int selected = this.menu.getSelectedRecord();
-        if (selected < 0 || selected >= DiscCatalog.size()) {
-            return false;
-        }
-
-        return DiscLyrics.hasLyrics(DiscCatalog.get(selected));
-    }
-
-    @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        this.renderBackground(graphics, mouseX, mouseY, partialTick);
-        super.render(graphics, mouseX, mouseY, partialTick);
-
-        updateBadgeAnimationTriggers();
-        updateLyricsButtonAnimation();
-
-        renderAnimatedCostBadge(graphics);
-        renderCategoryDropdown(graphics, mouseX, mouseY);
-
-        int baseY = this.topPos + 54;
-        int nameX = this.leftPos + 34;
-
-        if (!isMouseOverDropdown(mouseX, mouseY) && this.menu.hasBlankDisc() && !this.filteredIndexes.isEmpty()) {
-            int realIndex = this.filteredIndexes.get(this.filteredSelection);
-
-            if (mouseX >= nameX && mouseX < nameX + 104 && mouseY >= baseY && mouseY < baseY + 16) {
-                ItemStack hoveredStack = new ItemStack(DiscCatalog.get(realIndex));
-                graphics.renderTooltip(this.font, hoveredStack, mouseX, mouseY);
-            }
-        }
-
-        if (!isMouseOverDropdown(mouseX, mouseY)) {
-            this.renderTooltip(graphics, mouseX, mouseY);
-        }
-    }
-    private void drawScrollingClippedText(GuiGraphics guiGraphics, String text, int boxX, int boxY, int boxWidth, int color) {
-        if (text == null || text.isEmpty()) {
-            return;
-        }
-
-        int textWidth = this.font.width(text);
-        int textY = boxY + 4;
-
-        // If it fits, draw it normally
-        if (textWidth <= boxWidth - 8) {
-            guiGraphics.drawString(this.font, text, boxX + 4, textY, color, false);
-            return;
-        }
-
-        // Add spacing so the scroll loops nicely
-        String scrollingText = text + "   •   ";
-        int scrollingWidth = this.font.width(scrollingText);
-
-        long time = System.currentTimeMillis() / 150L; // smaller = faster scroll
-        int offset = (int) (time % scrollingWidth);
-
-        // Clip rendering to the text box area
-        guiGraphics.enableScissor(boxX, boxY, boxX + boxWidth, boxY + 16);
-
-        guiGraphics.drawString(this.font, scrollingText, boxX + 4 - offset, textY, color, false);
-        guiGraphics.drawString(this.font, scrollingText, boxX + 4 - offset + scrollingWidth, textY, color, false);
-
-        guiGraphics.disableScissor();
-    }
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        // Route keyboard input to the search box when focused
         if (this.searchBox != null && this.searchBox.isFocused()) {
             // ESC unfocuses the search box instead of trapping you in it
             if (keyCode == 256) { // GLFW_KEY_ESCAPE
@@ -539,6 +353,7 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
 
     @Override
     public boolean charTyped(char codePoint, int modifiers) {
+        // Route typed characters to the search box when focused
         if (this.searchBox != null && this.searchBox.isFocused()) {
             if (this.searchBox.charTyped(codePoint, modifiers)) {
                 rebuildFilteredList();
@@ -550,46 +365,285 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
         return super.charTyped(codePoint, modifiers);
     }
 
-    private void renderCategoryDropdown(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        if (!this.categoryDropdownOpen) {
+    // =========================================================
+    // Filtering / selection logic
+    // =========================================================
+
+    private void rebuildFilteredList() {
+        // If the currently active category disappears, fall back to ALL
+        if (!DiscCatalog.getAvailableCategories().contains(this.activeCategory)) {
+            this.activeCategory = DiscCatalog.DiscCategory.ALL;
+        }
+
+        this.filteredIndexes.clear();
+
+        // Pull the current search text safely
+        String query = this.searchBox == null ? "" : this.searchBox.getValue().toLowerCase(java.util.Locale.ROOT).trim();
+
+        // Rebuild the visible list based on category, subcategory, and search query
+        boolean canUseAdmin = canUseAdminDiscs();
+
+        for (int i = 0; i < DiscCatalog.size(); i++) {
+            ItemStack stack = new ItemStack(DiscCatalog.get(i));
+
+            boolean matchesCategory = DiscCatalog.matchesCategory(i, this.activeCategory);
+            boolean matchesHardcore = true;
+
+            if (this.activeCategory == DiscCatalog.DiscCategory.HARDCORE) {
+                matchesHardcore = DiscCatalog.matchesHardcoreSubCategory(i, this.activeHardcoreSubCategory);
+            }
+
+            boolean matchesSearch = query.isEmpty() || DiscSearchHelper.matchesQuery(stack, query);
+            boolean allowed = !DiscCatalog.isAdminOnly(i) || canUseAdmin;
+
+            if (matchesCategory && matchesHardcore && matchesSearch && allowed) {
+                this.filteredIndexes.add(i);
+            }
+        }
+
+        // If no results remain, reset selection index only
+        if (this.filteredIndexes.isEmpty()) {
+            this.filteredSelection = 0;
             return;
         }
 
-        int dropdownX = this.leftPos + 108;
-        int dropdownY = this.topPos + 6;
-        int dropdownListWidth = 110;
-        int rowHeight = 16;
+        // Keep the same selected disc if it still exists in the filtered list
+        int currentSelected = this.menu.getSelectedRecord();
+        int foundIndex = this.filteredIndexes.indexOf(currentSelected);
 
-        List<DiscCatalog.DiscCategory> values = DiscCatalog.getAvailableCategories();
+        if (foundIndex >= 0) {
+            this.filteredSelection = foundIndex;
+        } else {
+            this.filteredSelection = 0;
+        }
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 500);
+        // Push the newly selected visible disc back into the menu selection
+        if (this.menu.hasBlankDisc() && this.minecraft != null && this.minecraft.gameMode != null) {
+            int realIndex = this.filteredIndexes.get(this.filteredSelection);
+            this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, realIndex + 1000);
+        }
+    }
 
-        for (int i = 0; i < values.size(); i++) {
-            int rowY = dropdownY + rowHeight + (i * rowHeight);
-            boolean selected = values.get(i) == this.activeCategory;
+    // =========================================================
+    // Category bar logic / rendering
+    // =========================================================
 
-            guiGraphics.fill(
-                    dropdownX,
-                    rowY,
-                    dropdownX + dropdownListWidth,
-                    rowY + rowHeight,
-                    selected ? 0xFF666699 : 0xFF000000
-            );
+    private boolean handleCategoryBarClick(double mouseX, double mouseY) {
+        List<DiscCatalog.DiscCategory> categories = DiscCatalog.getAvailableCategories();
+        int totalWidth = getTotalCategoryBarWidth(categories);
+        int rowStartX = this.leftPos + (this.imageWidth / 2) - (totalWidth / 2);
+        int rowY = this.topPos - 18;
+        int buttonHeight = CATEGORY_TAB_HEIGHT;
+
+        int buttonX = rowStartX;
+
+        // Top-level category buttons
+        for (DiscCatalog.DiscCategory category : categories) {
+            String text = category.getDisplayName();
+            int width = getCategoryTabWidth(text);
+
+            if (mouseX >= buttonX && mouseX < buttonX + width
+                    && mouseY >= rowY && mouseY < rowY + buttonHeight) {
+                this.activeCategory = category;
+
+                // Leaving HARDCORE resets subcategory selection
+                if (category != DiscCatalog.DiscCategory.HARDCORE) {
+                    this.activeHardcoreSubCategory = DiscCatalog.HardcoreSubCategory.ALL;
+                }
+
+                rebuildFilteredList();
+                return true;
+            }
+
+            buttonX += width + CATEGORY_TAB_SPACING;
+        }
+
+        // Hardcore subcategory buttons
+        if (this.activeCategory == DiscCatalog.DiscCategory.HARDCORE) {
+            int subTotalWidth = getTotalHardcoreSubcategoryBarWidth();
+            int subRowY = this.topPos - 34;
+            int subButtonX = this.leftPos + (this.imageWidth / 2) - (subTotalWidth / 2);
+            int subButtonHeight = CATEGORY_TAB_HEIGHT;
+
+            for (DiscCatalog.HardcoreSubCategory subCategory : DiscCatalog.HardcoreSubCategory.values()) {
+                String text = subCategory.getDisplayName();
+                int width = getCategoryTabWidth(text);
+
+                if (mouseX >= subButtonX && mouseX < subButtonX + width
+                        && mouseY >= subRowY && mouseY < subRowY + subButtonHeight) {
+                    this.activeHardcoreSubCategory = subCategory;
+                    rebuildFilteredList();
+                    return true;
+                }
+
+                subButtonX += width + CATEGORY_TAB_SPACING;
+            }
+        }
+
+        return false;
+    }
+
+    private void renderCategoryBar(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        List<DiscCatalog.DiscCategory> categories = DiscCatalog.getAvailableCategories();
+
+        // If fully hidden, draw only the collapsed tab
+        if (!this.categoryBarVisible && this.categoryBarAnim <= 0.0f) {
+            renderCollapsedCategoryTab(guiGraphics);
+            return;
+        }
+
+        int collapsedX = getCollapsedCategoryX();
+        int collapsedY = getCollapsedCategoryY();
+        int collapsedWidth = getCategoryTabWidth("Categories");
+        int collapsedCenterX = collapsedX + collapsedWidth / 2;
+
+        int totalWidth = getTotalCategoryBarWidth(categories);
+        int rowStartX = this.leftPos + (this.imageWidth / 2) - (totalWidth / 2);
+        int finalY = this.topPos - 15;
+        int buttonHeight = CATEGORY_TAB_HEIGHT;
+
+        int buttonX = rowStartX;
+
+        // Animate each category tab from the collapsed tab into its full position
+        for (DiscCatalog.DiscCategory category : categories) {
+            String text = category.getDisplayName();
+            int width = getCategoryTabWidth(text);
+            boolean selected = category == this.activeCategory;
+
+            int startX = collapsedCenterX - width / 2;
+            int startY = collapsedY;
+
+            int animatedX = lerpInt(this.categoryBarAnim, startX, buttonX);
+            int animatedY = lerpInt(this.categoryBarAnim, startY, finalY);
+
+            int alpha = (int) (255 * this.categoryBarAnim);
+            int textColor = (alpha << 24) | 0xFFFFFF;
+            int bgAlpha = (int) (200 * this.categoryBarAnim);
+            int bgColor = selected ? 0xFF666699 : ((bgAlpha << 24) | 0x000000);
+
+            guiGraphics.fill(animatedX, animatedY, animatedX + width, animatedY + buttonHeight, bgColor);
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().scale(CATEGORY_TEXT_SCALE, CATEGORY_TEXT_SCALE, 1f);
 
             guiGraphics.drawString(
                     this.font,
-                    values.get(i).getDisplayName(),
-                    dropdownX + 4,
-                    rowY + 4,
+                    text,
+                    (int) ((animatedX + 3) / CATEGORY_TEXT_SCALE),
+                    (int) ((animatedY + 2) / CATEGORY_TEXT_SCALE),
+                    textColor,
+                    false
+            );
+
+            guiGraphics.pose().popPose();
+
+            buttonX += width + CATEGORY_TAB_SPACING;
+        }
+
+        // Only draw hardcore subcategories once the main category bar is basically fully opened
+        if (this.activeCategory == DiscCatalog.DiscCategory.HARDCORE && this.categoryBarAnim > 0.95f) {
+            renderHardcoreSubcategoryBar(guiGraphics, mouseX, mouseY);
+        }
+    }
+
+    private void renderCollapsedCategoryTab(GuiGraphics guiGraphics) {
+        int collapsedX = getCollapsedCategoryX();
+        int collapsedY = getCollapsedCategoryY();
+        int collapsedWidth = getCategoryTabWidth("Categories");
+        int buttonHeight = CATEGORY_TAB_HEIGHT;
+
+        guiGraphics.fill(
+                collapsedX,
+                collapsedY,
+                collapsedX + collapsedWidth,
+                collapsedY + buttonHeight,
+                0xCC000000
+        );
+
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().scale(CATEGORY_TEXT_SCALE, CATEGORY_TEXT_SCALE, 1f);
+
+        guiGraphics.drawString(
+                this.font,
+                "Categories",
+                (int) ((collapsedX + 3) / CATEGORY_TEXT_SCALE),
+                (int) ((collapsedY + 2) / CATEGORY_TEXT_SCALE),
+                0xFFFFFFFF,
+                false
+        );
+
+        guiGraphics.pose().popPose();
+    }
+
+    private void renderHardcoreSubcategoryBar(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        DiscCatalog.HardcoreSubCategory[] subCategories = DiscCatalog.HardcoreSubCategory.values();
+
+        int totalWidth = getTotalHardcoreSubcategoryBarWidth();
+        int rowY = this.topPos - 34;
+        int buttonX = this.leftPos + (this.imageWidth / 2) - (totalWidth / 2);
+        int buttonHeight = CATEGORY_TAB_HEIGHT;
+
+        for (DiscCatalog.HardcoreSubCategory subCategory : subCategories) {
+            String text = subCategory.getDisplayName();
+            int width = getCategoryTabWidth(text);
+            boolean selected = subCategory == this.activeHardcoreSubCategory;
+
+            guiGraphics.fill(
+                    buttonX,
+                    rowY,
+                    buttonX + width,
+                    rowY + buttonHeight,
+                    selected ? 0xFF996666 : 0xCC000000
+            );
+
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().scale(CATEGORY_TEXT_SCALE, CATEGORY_TEXT_SCALE, 1f);
+
+            guiGraphics.drawString(
+                    this.font,
+                    text,
+                    (int) ((buttonX + 3) / CATEGORY_TEXT_SCALE),
+                    (int) ((rowY + 2) / CATEGORY_TEXT_SCALE),
                     0xFFFFFFFF,
                     false
             );
+
+            guiGraphics.pose().popPose();
+
+            buttonX += width + CATEGORY_TAB_SPACING;
+        }
+    }
+
+    // =========================================================
+    // Lyrics helpers / lyrics UI helpers
+    // =========================================================
+
+    private boolean selectedDiscHasLyrics() {
+        int selected = this.menu.getSelectedRecord();
+        if (selected < 0 || selected >= DiscCatalog.size()) {
+            return false;
         }
 
-        guiGraphics.flush();
-        guiGraphics.pose().popPose();
+        return DiscLyrics.hasLyrics(DiscCatalog.get(selected));
     }
+
+    private void updateLyricsButtonAnimation() {
+        boolean hasLyrics = ModClientConfig.SHOW_LYRICS.get()
+                && ModClientConfig.SHOW_LYRICS_BUTTON.get()
+                && this.menu.hasBlankDisc()
+                && selectedDiscHasLyrics();
+
+        float speed = 0.12F;
+
+        if (hasLyrics) {
+            this.lyricsButtonAnim = Math.min(1.0F, this.lyricsButtonAnim + speed);
+        } else {
+            this.lyricsButtonAnim = Math.max(0.0F, this.lyricsButtonAnim - speed);
+        }
+
+        this.lastLyricsAvailable = hasLyrics;
+    }
+
     private void renderLyricsButton(GuiGraphics guiGraphics) {
         if (this.lyricsButtonAnim <= 0.0F) {
             return;
@@ -624,5 +678,225 @@ public class MusicBlockScreen extends AbstractContainerScreen<MusicBlockMenu> {
             );
         }
     }
-}
 
+    private int getLyricsButtonX() {
+        return this.leftPos + this.imageWidth - 23;
+    }
+
+    private int getLyricsButtonY() {
+        return this.topPos + 5;
+    }
+
+    // =========================================================
+    // XP badge animation / rendering
+    // =========================================================
+
+    private void startBadgeAnimation() {
+        this.badgeAnimStartTime = System.currentTimeMillis();
+        this.badgeAnimating = true;
+    }
+
+    private void updateBadgeAnimationTriggers() {
+        boolean hasBlankDisc = this.menu.hasBlankDisc();
+
+        // Animate when a blank disc is newly inserted
+        if (hasBlankDisc && !this.lastHadBlankDisc) {
+            startBadgeAnimation();
+        }
+
+        // Animate when category changes while a blank disc is present
+        if (hasBlankDisc && this.activeCategory != this.lastAnimatedCategory) {
+            startBadgeAnimation();
+        }
+
+        this.lastHadBlankDisc = hasBlankDisc;
+        this.lastAnimatedCategory = this.activeCategory;
+    }
+
+    private void renderAnimatedCostBadge(GuiGraphics guiGraphics) {
+        int selected = this.menu.getSelectedRecord();
+
+        if (!this.menu.hasBlankDisc()
+                || selected < 0
+                || selected >= DiscCatalog.size()
+                || this.minecraft == null
+                || this.minecraft.player == null) {
+            return;
+        }
+
+        int xpCost = DiscCatalog.getXpCost(selected);
+        boolean canAfford = this.minecraft.player.isCreative() || this.minecraft.player.experienceLevel >= xpCost;
+
+        String xpLabel = xpCost + "L";
+        int textColor = canAfford ? 0xFF80FF20 : 0xFFFF6060;
+
+        int badgeHeight = 12;
+        int fullWidth = 36;
+        int animatedWidth = fullWidth;
+
+        int drawX = this.leftPos + 133;
+        int drawY = this.topPos + 24;
+
+        if (this.badgeAnimating) {
+            float durationMs = 550.0F;
+            float rawT = (System.currentTimeMillis() - this.badgeAnimStartTime) / durationMs;
+
+            if (rawT >= 1.0F) {
+                rawT = 1.0F;
+                this.badgeAnimating = false;
+            }
+
+            float t = easeOutCubic(rawT);
+            animatedWidth = Math.max(8, (int) (fullWidth * (0.4F + 0.6F * t)));
+        }
+
+        guiGraphics.fill(drawX, drawY, drawX + animatedWidth, drawY + badgeHeight, 0xFF2B2B2B);
+
+        int textWidth = this.font.width(xpLabel);
+        int textX = drawX + (animatedWidth / 2) - (textWidth / 2);
+        int textY = drawY + 2;
+
+        guiGraphics.drawString(this.font, xpLabel, textX, textY, textColor, false);
+    }
+
+    // =========================================================
+    // Layout / hover / category sizing helpers
+    // =========================================================
+
+    private int getCategoryTabWidth(String text) {
+        return (int) (this.font.width(text) * CATEGORY_TEXT_SCALE) + CATEGORY_TAB_PADDING;
+    }
+
+    private int getTotalCategoryBarWidth(List<DiscCatalog.DiscCategory> categories) {
+        int total = 0;
+
+        for (int i = 0; i < categories.size(); i++) {
+            total += getCategoryTabWidth(categories.get(i).getDisplayName());
+            if (i < categories.size() - 1) {
+                total += CATEGORY_TAB_SPACING;
+            }
+        }
+
+        return total;
+    }
+
+    private int getTotalHardcoreSubcategoryBarWidth() {
+        int total = 0;
+        DiscCatalog.HardcoreSubCategory[] subCategories = DiscCatalog.HardcoreSubCategory.values();
+
+        for (int i = 0; i < subCategories.length; i++) {
+            total += getCategoryTabWidth(subCategories[i].getDisplayName());
+            if (i < subCategories.length - 1) {
+                total += CATEGORY_TAB_SPACING;
+            }
+        }
+
+        return total;
+    }
+
+    private int getCollapsedCategoryX() {
+        int width = getCategoryTabWidth("Categories");
+        return this.leftPos + (this.imageWidth / 2) - (width / 2);
+    }
+
+    private int getCollapsedCategoryY() {
+        return this.topPos + 1;
+    }
+
+    private int getCategoryBarXOffset() {
+        boolean hasHardcore = DiscCatalog.getAvailableCategories().contains(DiscCatalog.DiscCategory.HARDCORE);
+        return hasHardcore ? -45 : -8;
+    }
+
+    private boolean isHoveringCategoryArea(int mouseX, int mouseY) {
+        List<DiscCatalog.DiscCategory> categories = DiscCatalog.getAvailableCategories();
+
+        int totalWidth = getTotalCategoryBarWidth(categories);
+        int rowStartX = this.leftPos + (this.imageWidth / 2) - (totalWidth / 2);
+        int rowEndX = rowStartX + totalWidth;
+
+        int collapsedX = getCollapsedCategoryX();
+        int collapsedY = getCollapsedCategoryY();
+        int collapsedWidth = getCategoryTabWidth("Categories");
+        int collapsedEndX = collapsedX + collapsedWidth;
+
+        int panelLeft = Math.min(collapsedX, rowStartX) - 16;
+        int panelRight = Math.max(collapsedEndX, rowEndX) + 16;
+
+        int panelTop = Math.min(collapsedY, this.topPos - 15) - 10;
+        int panelBottom = this.topPos + CATEGORY_TAB_HEIGHT + 10;
+
+        if (this.activeCategory == DiscCatalog.DiscCategory.HARDCORE) {
+            panelTop = Math.min(panelTop, this.topPos - 34 - 10);
+        }
+
+        return mouseX >= panelLeft && mouseX <= panelRight
+                && mouseY >= panelTop && mouseY <= panelBottom;
+    }
+
+    // =========================================================
+    // Small utility / drawing helpers
+    // =========================================================
+
+    private boolean canUseAdminDiscs() {
+        return this.minecraft != null
+                && this.minecraft.player != null
+                && this.minecraft.player.hasPermissions(2);
+    }
+
+    private String getCurrentDiscLabel() {
+        if (!this.menu.hasBlankDisc()) {
+            return "Insert Blank Disc";
+        }
+
+        if (this.filteredIndexes.isEmpty()) {
+            return "No matching discs";
+        }
+
+        int selected = this.menu.getSelectedRecord();
+
+        if (!this.filteredIndexes.contains(selected)) {
+            selected = this.filteredIndexes.get(0);
+        }
+
+        if (selected >= 0 && selected < DiscCatalog.size()) {
+            return DiscSearchHelper.getDisplayDescription(new ItemStack(DiscCatalog.get(selected)));
+        }
+
+        return "Insert Blank Disc";
+    }
+
+    private float easeOutCubic(float t) {
+        return 1.0F - (float) Math.pow(1.0F - t, 3.0);
+    }
+
+    private void drawScrollingClippedText(GuiGraphics guiGraphics, String text, int boxX, int boxY, int boxWidth, int color) {
+        if (text == null || text.isEmpty()) {
+            return;
+        }
+
+        int textWidth = this.font.width(text);
+        int textY = boxY + 4;
+
+        // If it fits, draw it normally
+        if (textWidth <= boxWidth - 8) {
+            guiGraphics.drawString(this.font, text, boxX + 4, textY, color, false);
+            return;
+        }
+
+        // Add spacing so the scroll loops nicely
+        String scrollingText = text + "   •   ";
+        int scrollingWidth = this.font.width(scrollingText);
+
+        long time = System.currentTimeMillis() / 150L; // smaller = faster scroll
+        int offset = (int) (time % scrollingWidth);
+
+        // Clip rendering to the text box area
+        guiGraphics.enableScissor(boxX, boxY, boxX + boxWidth, boxY + 16);
+
+        guiGraphics.drawString(this.font, scrollingText, boxX + 4 - offset, textY, color, false);
+        guiGraphics.drawString(this.font, scrollingText, boxX + 4 - offset + scrollingWidth, textY, color, false);
+
+        guiGraphics.disableScissor();
+    }
+}

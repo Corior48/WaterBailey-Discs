@@ -1,0 +1,15 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "waterbaileydiscs:big_noodle_titling.ttf",
+      "shift": [0, 0],
+      "size": 10,
+      "oversample": 2.0
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}

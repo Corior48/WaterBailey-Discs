@@ -1,0 +1,11 @@
+{
+  "item": "waterbaileydiscs:sonicexe_bendrowned_rap",
+  "title": "Sonic.EXE vs Ben Drowned",
+  "texture": "sonicexe_bendrowned_rap",
+  "font": "waterbaileydiscs:dtm_sans",
+  "lines": [
+    "how the hell do you have access to my discs?",
+    "seriously, this is admin only!",
+    "destroy this cd"
+  ]
+}

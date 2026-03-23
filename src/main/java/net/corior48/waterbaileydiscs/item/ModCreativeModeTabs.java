@@ -80,6 +80,32 @@ public class ModCreativeModeTabs {
                 output.accept(REVENGE.get());
             }).build());
 
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> ADDITIONAL_DISCS = CREATIVE_MODE_TAB.register("additional_discs", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.waterbaileydiscs.additional"))
+            .withTabsBefore(ResourceLocation.fromNamespaceAndPath(WaterBaileyDiscs.MODID, "waterbailey_discs"))
+            .icon(() -> LISTEN_MY_WAY.get().getDefaultInstance())
+            .displayItems((itemDisplayParameters, output) -> {
+                output.accept(FUHUHHUK.get());
+                output.accept(HOPES_AND_DREAMS_REMASTER.get());
+                output.accept(LISTEN_MY_WAY.get());
+                output.accept(MARIOS_INVINCIBLE_SONG.get());
+                output.accept(NEVER_GONNA_STOP.get());
+                output.accept(ONLY_FORCE_FOR_ME.get());
+                output.accept(RAMBLEY_KINITO_RAP.get());
+                output.accept(REVENGE_2.get());
+                output.accept(SEXY_LUIGI.get());
+                output.accept(SONICEXE_BENDROWNED_RAP.get());
+                output.accept(STORY_OF_UNDERTALE_MOTI.get());
+                output.accept(STRONGER_DAFT_SPEED.get());
+                output.accept(TRIPLE_THE_THREAT_NONGAGOS.get());
+                output.accept(BEN_DROWNED.get());
+                output.accept(BACKBONE_REMIX.get());
+                output.accept(LIKE_FATHER_LIKE_SON.get());
+                output.accept(MEGALOVANIA_DEMITALE.get());
+                output.accept(MEGALOVANIA_ELEVATOR_JAZZ.get());
+
+            }).build());
+
 
 
 

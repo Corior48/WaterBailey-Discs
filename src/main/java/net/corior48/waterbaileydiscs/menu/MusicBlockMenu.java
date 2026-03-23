@@ -24,6 +24,22 @@ public class MusicBlockMenu extends AbstractContainerMenu {
         return DiscCatalog.getXpCost(selected);
     }
 
+    private boolean canUseAdminDiscs(Player player) {
+        return player != null && player.hasPermissions(2);
+    }
+
+    private boolean isSelectableBy(Player player, int index) {
+        if (index < 0 || index >= DiscCatalog.size()) {
+            return false;
+        }
+
+        if (DiscCatalog.isAdminOnly(index) && !canUseAdminDiscs(player)) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static final int INPUT_SLOT = 0;
     public static final int OUTPUT_SLOT = 1;
 
@@ -101,12 +117,18 @@ public class MusicBlockMenu extends AbstractContainerMenu {
         return this.data.get(DATA_HAS_BLANK_DISC) == 1;
     }
 
-    public void setSelectedRecord(int index) {
-        if (this.blockEntity != null) {
-            this.blockEntity.setSelectedRecord(index);
-            syncDataFromBlockEntity();
-            this.broadcastChanges();
+    public void setSelectedRecord(Player player, int index) {
+        if (this.blockEntity == null) {
+            return;
         }
+
+        if (!isSelectableBy(player, index)) {
+            return;
+        }
+
+        this.blockEntity.setSelectedRecord(index);
+        syncDataFromBlockEntity();
+        this.broadcastChanges();
     }
 
     private void syncDataFromBlockEntity() {
@@ -170,26 +192,37 @@ public class MusicBlockMenu extends AbstractContainerMenu {
         if (id >= 1000) {
             int realIndex = id - 1000;
 
-            if (realIndex < 0 || realIndex >= size) {
+            if (!isSelectableBy(player, realIndex)) {
                 return false;
             }
 
-            setSelectedRecord(realIndex);
+            setSelectedRecord(player, realIndex);
             return true;
         }
 
         int selected = getSelectedRecord();
 
         if (id == 0) {
-            selected = (selected - 1 + size) % size;
+            for (int i = 0; i < size; i++) {
+                selected = (selected - 1 + size) % size;
+                if (isSelectableBy(player, selected)) {
+                    setSelectedRecord(player, selected);
+                    return true;
+                }
+            }
+            return false;
         } else if (id == 1) {
-            selected = (selected + 1) % size;
+            for (int i = 0; i < size; i++) {
+                selected = (selected + 1) % size;
+                if (isSelectableBy(player, selected)) {
+                    setSelectedRecord(player, selected);
+                    return true;
+                }
+            }
+            return false;
         } else {
             return false;
         }
-
-        setSelectedRecord(selected);
-        return true;
     }
 
     private void addPlayerInventory(Inventory inventory) {

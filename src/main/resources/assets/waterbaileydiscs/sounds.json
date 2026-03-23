@@ -1,0 +1,472 @@
+{
+  "test_disc": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/test_disc",
+        "stream": true
+      }
+    ]
+  },
+    "angel_hare_side_a": {
+      "sounds": [
+        {
+          "name": "waterbaileydiscs:wxb/angel_hare_side_a",
+          "stream": true
+        }
+      ]
+    },
+    "oh_despair": {
+      "sounds": [
+        {
+          "name": "waterbaileydiscs:wxb/oh_despair",
+          "stream": true
+        }
+      ]
+    },
+  "villager_lullaby": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/villager_lullaby",
+        "stream": true
+      }
+    ]
+  },
+  "megalovania_1": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/megalovania_1",
+        "stream": true
+      }
+    ]
+  },
+  "jaka_jaan": {
+    "sounds":[
+      {
+        "name": "waterbaileydiscs:wxb/jaka_jaan",
+        "stream": true
+      }
+    ]
+  },
+  "jaka_jaan_alternative": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/jaka_jaan_alternative",
+        "stream": true
+      }
+    ]
+  },
+  "among_us_remix": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/among_us_remix",
+        "stream": true
+      }
+    ]
+  },
+  "gangnam_style": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/gangnam_style",
+        "stream": true
+      }
+    ]
+  },
+  "a_mothers_love": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/a_mothers_love",
+        "stream": true
+      }
+    ]
+  },
+  "musician_use": {
+    "subtitle": "sounds.waterbaileydiscs:wxb/.musician_use",
+    "sounds": [
+      "waterbaileydiscs:wxb/musician_use"
+    ]
+  },
+  "endless_encore": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/endless_encore",
+      "stream": true
+      }
+    ]
+  },
+  "blazing_heart": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/blazing_heart",
+      "stream": true
+      }
+    ]
+  },
+  "disco_eggmans_announcement": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/disco_eggmans_announcement",
+      "stream": true
+     }
+    ]
+  },
+  "dont_mine_at_night": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/dont_mine_at_night",
+      "stream": true
+      }
+    ]
+  },
+  "emberfire": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/emberfire",
+      "stream": true
+      }
+    ]
+  },
+  "furina_theme": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/furina_theme",
+      "stream": true
+      }
+    ]
+  },
+  "kyles_mom": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/kyles_mom",
+      "stream": true
+      }
+    ]
+  },
+  "majin_forest_escape": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/majin_forest_escape",
+      "stream": true
+      }
+    ]
+  },
+  "never_gonna_give_you_up":{
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/never_gonna_give_you_up",
+      "stream": true
+      }
+    ]
+  },
+  "results_and_chill": {
+   "sounds": [
+     {
+     "name": "waterbaileydiscs:wxb/results_and_chill",
+     "stream": true
+    }
+   ]
+  },
+  "still_alive": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/still_alive",
+      "stream": true
+      }
+    ]
+  },
+  "want_you_gone": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/want_you_gone",
+      "stream": true
+      }
+    ]
+  },
+  "water_me_down": {
+    "sounds": [
+      {
+      "name": "waterbaileydiscs:wxb/water_me_down",
+      "stream": true
+      }
+    ]
+  },
+  "among_us_lofi": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/among_us_lofi",
+        "stream": true
+      }
+    ]
+  },
+  "vs_sonic_exe_rerun": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/vs_sonic_exe_rerun",
+        "stream": true
+      }
+    ]
+  },
+  "god_devouring_mania": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/god_devouring_mania",
+        "stream": true
+      }
+    ]
+  },
+  "interstellar_drift": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/interstellar_drift",
+        "stream": true
+      }
+    ]
+  },
+  "irresistible_force": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/irresistible_force",
+        "stream": true
+      }
+    ]
+  },
+  "kitchen_gun": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/kitchen_gun",
+        "stream": true
+      }
+    ]
+  },
+  "la_vaguelette": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/la_vaguelette",
+        "stream": true
+      }
+    ]
+  },
+  "pleasant_tipsiness": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/pleasant_tipsiness",
+        "stream": true
+      }
+    ]
+  },
+  "polumnia_omnia": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/polumnia_omnia",
+        "stream": true
+      }
+    ]
+  },
+  "tar_tar_taglia": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/tar_tar_taglia",
+        "stream": true
+      }
+    ]
+  },
+  "asgore_runs_over_dess": {
+  "sounds": [
+    {
+      "name": "waterbaileydiscs:wxb/asgore_runs_over_dess",
+      "stream": true
+    }
+  ]
+},
+  "nod_krai": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/nod_krai",
+        "stream": true
+      }
+    ]
+  },
+  "summer_tropicala": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/summer_tropicala",
+        "stream": true
+      }
+    ]
+  },
+  "diggy_diggy_hole": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/diggy_diggy_hole",
+        "stream": true
+      }
+    ]
+  },
+  "house_of_mirrors": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/house_of_mirrors",
+        "stream": true
+      }
+    ]
+  },
+  "revenge": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:wxb/revenge",
+        "stream": true
+      }
+    ]
+  },
+  "ben_drowned": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/podcasts/ben_drowned",
+        "stream": true
+      }
+    ]
+  },
+  "sexy_luigi": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/sexy_luigi",
+        "stream": true
+      }
+    ]
+  },
+  "hopes_and_dreams_remaster": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/hopes_and_dreams_remaster",
+        "stream": true
+      }
+    ]
+  },
+  "fuhuhuhk": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/fuhuhuhk",
+        "stream": true
+      }
+    ]
+  },
+  "listen_my_way": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/listen_my_way",
+        "stream": true
+      }
+    ]
+  },
+  "marios_invincible_song": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/marios_invincible_song",
+        "stream": true
+      }
+    ]
+  },
+  "never_gonna_stop": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/never_gonna_stop",
+        "stream": true
+      }
+    ]
+  },
+  "only_force_for_me": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/only_force_for_me",
+        "stream": true
+      }
+    ]
+  },
+  "rambley_kinito_rap": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/rambley_kinito_rap",
+        "stream": true
+      }
+    ]
+  },
+  "revenge_2": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/revenge_2",
+        "stream": true
+      }
+    ]
+  },
+  "sonicexe_bendrowned_rap": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/sonicexe_bendrowned_rap",
+        "stream": true
+      }
+    ]
+  },
+  "story_of_undertale_moti": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/story_of_undertale_moti",
+        "stream": true
+      }
+    ]
+  },
+  "susie_yuri_rap": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/susie_yuri_rap",
+        "stream": true
+      }
+    ]
+  },
+  "stronger_daft_speed": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/stronger_daft_speed",
+        "stream": true
+      }
+    ]
+  },
+  "triple_the_threat_nongagos": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/non-main/triple_the_threat_nongagos",
+        "stream": true
+      }
+    ]
+  },
+  "backbone_remix": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/soundcloud/backbone_remix",
+        "stream": true
+      }
+    ]
+  },
+  "like_father_like_son": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/soundcloud/like_father_like_son",
+        "stream": true
+      }
+    ]
+  },
+  "megalovania_demitale": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/soundcloud/megalovania_demitale",
+        "stream": true
+      }
+    ]
+  },
+  "megalovania_elevator_jazz": {
+    "sounds": [
+      {
+        "name": "waterbaileydiscs:hardcore/soundcloud/megalovania_elevator_jazz",
+        "stream": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "waterbaileydiscs:delfino.ttf",
+      "shift": [0, 0],
+      "size": 11,
+      "oversample": 2.0
+    }
+  ]
+}

@@ -13,4 +13,6 @@ public class ModConfigValues {
     public static boolean showLyricsButton() {
         return ModClientConfig.SHOW_LYRICS_BUTTON.get();
     }
+
+    public static boolean hardcoreDiscsEnabled() {return ModClientConfig.HARDCORE_DISCS_ENABLED.get();}
 }

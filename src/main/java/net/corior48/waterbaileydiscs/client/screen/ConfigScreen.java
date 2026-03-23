@@ -1,8 +1,11 @@
 package net.corior48.waterbaileydiscs.client.screen;
 
+import net.corior48.waterbaileydiscs.common.DiscCatalog;
 import net.corior48.waterbaileydiscs.config.ModClientConfig;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.ConfirmScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
@@ -56,6 +59,31 @@ public class ConfigScreen extends Screen {
         ).bounds(centerX - 100, y + 48, 200, 20).build());
 
         this.addRenderableWidget(Button.builder(
+                Component.literal(getHardcoreDiscsText()),
+                button -> {
+                    if (ModClientConfig.HARDCORE_DISCS_ENABLED.get()) {
+                        ModClientConfig.setHardcoreDiscEnabled(false);
+                        button.setMessage(Component.literal(getHardcoreDiscsText()));
+                    } else {
+                        Minecraft.getInstance().setScreen(new ConfirmScreen(
+                                confirmed -> {
+                                    if (confirmed) {
+                                        ModClientConfig.setHardcoreDiscEnabled(true);
+                                    }
+                                    Minecraft.getInstance().setScreen(new ConfigScreen(parent));
+                                },
+                                Component.literal("Hardcore Discs Warning"),
+                                Component.literal(
+                                        "These discs may not be stream safe.\n" +
+                                                "The additional songs that come from in Matt's Hardcore Series may include\n" +
+                                                "certain topics not fit for stream!\n" +
+                                        "Enable only if you understand the content warning.")
+                        ));
+                    }
+                }
+        ).bounds(centerX - 100, y + 72, 200, 20).build());
+
+        this.addRenderableWidget(Button.builder(
                 Component.literal("Done"),
                 button -> {
                     saveConfig();
@@ -63,7 +91,7 @@ public class ConfigScreen extends Screen {
                         this.minecraft.setScreen(parent);
                     }
                 }
-        ).bounds(centerX - 100, y + 84, 98, 20).build());
+        ).bounds(centerX - 100, y + 108, 98, 20).build());
 
         this.addRenderableWidget(Button.builder(
                 Component.literal("Cancel"),
@@ -72,7 +100,11 @@ public class ConfigScreen extends Screen {
                         this.minecraft.setScreen(parent);
                     }
                 }
-        ).bounds(centerX + 2, y + 84, 98, 20).build());
+        ).bounds(centerX + 2, y + 108, 98, 20).build());
+    }
+
+    private String getHardcoreDiscsText() {
+        return "Hardcore Discs: " + (ModClientConfig.HARDCORE_DISCS_ENABLED.get() ? "SUBSCRIBED" : "OFF");
     }
 
     private String getShowLyricsText() {

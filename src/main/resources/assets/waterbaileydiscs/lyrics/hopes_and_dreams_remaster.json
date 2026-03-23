@@ -1,0 +1,223 @@
+{
+  "item": "waterbaileydiscs:hopes_and_dreams_remaster",
+  "title": "§0Hopes and Dreams (Remastered)",
+  "texture": "hopes_and_dreams",
+  "font": "waterbaileydiscs:dtm_sans",
+  "lines": [
+    "ASRIEL:",
+    "It's the end",
+    "It's your doom",
+    "As you draw",
+    "your final breath",
+    "Now my friend",
+    "Let's resume,",
+    "Face the GOD OF HYPERDEATH!",
+    "Time and space",
+    "In my hands",
+    [
+      { "text":  "With a thought, it will ", "color": "#FFFFFF"},
+      {"text": "RESET", "color": "#FEC700"}
+    ],
+    [
+      {"text": "All ", "color": "#FFFFFF"},
+      {"text": "ERASED ", "color": "#FDAE3F"},
+      {"text": "at my command", "color": "#FFFFFF"}
+    ],
+    "One more round",
+    "you won't forget",
+    "Still I know you'll keep on trying",
+    "Even though you'd lose again",
+    "You would play through endless dying",
+    "For the sake of your best friend",
+    [
+      {"text": "' Cause you want a ", "color": "#FFFFFF"},
+      {"text":  "HAPPY ENDING", "color": "#D6AC1C"}
+    ],
+    "You love your friends, who could blame you",
+    "You're filled with",
+    "DETERMINATION",
+    "CHARA",
+    "",
+    "FRISK:",
+    [
+      {"text": "That is not my name!", "color": "#FE1613"}
+    ],
+    "",
+    "ASRIEL:",
+    "We'll be here fighting together,",
+    "Playing for eternity,",
+    "The strength that let you get this far",
+    "It's nothing compared to me!",
+    "I feel your determination",
+    "You can feel their hopes and dreams",
+    "But at the end of this tale",
+    "There is only you and me!",
+    "",
+    "Freed from the flower",
+    "Now my true power",
+    "Fills all the dark with light!",
+    "Now I'm uncovered",
+    "So let you brother",
+    "Finally win the fight!",
+    "",
+    "FRISK:",
+    "Seen the history",
+    "A broken family",
+    "But it can be repaired",
+    "May not be Chara",
+    "But I still swear",
+    [
+      {"text": "Even you can be ", "color": "#FFFFFF"},
+      {"text": "SPARED!", "color": "#FFDB04"}
+    ],
+    "You think you are something special",
+    "You're a kid playing pretend",
+    "I refuse to fall before you",
+    "Soon this sorry tale will end!",
+    "Gods and monsters getting stronger",
+    "Growing hope they kept inside",
+    "Their hopes keep me standing as long",
+    "as I keep their dream alive",
+    "",
+    "ASRIEL:",
+    "You think to lecture me on hopes and dreams?",
+    "I think you'll find that they are such fragile things",
+    "",
+    "FRISK:",
+    "Feels like a thousand lifetimes STRUGGLING",
+    "But I'll keep up that struggle",
+    "'Till we are all free!",
+    "",
+    "BOTH:",
+    "We'll never let go of our",
+    "HOPES AND DREAMS",
+    "We never will give up",
+    "For eternity!",
+    "",
+    "ASRIEL:",
+    "But I've been holding back",
+    "on you 'tll now",
+    "Let's see if you can survive this!",
+    [
+      {"text":"DIE", "color":"#FD0000"}
+    ],
+    "FOR ME!",
+    "",
+    "Don't you understand?",
+    "This world is one of death and tragedy!",
+    "IT'S KILLED OR BE KILLED!",
+    "So why are you still standing?",
+    [
+      {"text": "WHY ARE YOU STILL TRYING TO STOP ME, ", "color": "#FFFFFF"},
+      {"text": "CHARA?", "color": "#F90001"}
+    ],
+    "",
+    "FRISK:",
+    "My name...",
+    [
+      {"text": "is ", "color": "#FFFFFF"},
+      {"text": "FRISK!", "color": "#FE3500"}
+    ],
+    "",
+    "In my heart",
+    "A shining light",
+    "Sharing joy",
+    "To all I know",
+    "In my soul",
+    "A worthy fight",
+    "To deliver tomorrow!",
+    "",
+    [
+      {"text": "We know the past", "color": "#6C4CFF"}
+    ],
+    [
+      {"text":"has a pain that will last", "color": "#6C4CFF"}
+    ],
+    [
+      {"text": "But the presents what you make", "color": "#6C4CFF"}
+    ],
+    "While there's a future",
+    "worth fighting for",
+    "I will never break!",
+    [
+      {"text": "Walked a long road", "color": "#6240FE"}
+    ],
+    [
+      {"text": "but I finally know why", "color": "#6240FE"}
+    ],
+    [
+      {"text": "fate brought me this way", "color": "#6240FE"}
+    ],
+    [
+      {"text": "I'll share the love","color": "#6342FD"}
+    ],
+    [
+      {"text": "worth dreaming of", "color": "#6342FD"}
+    ],
+    [
+      {"text": "Until this world is saved", "color": "#6342FD"}
+    ],
+    "",
+    [
+      {"text": "Asriel, please do not quail", "color": "#C68C2B"}
+    ],
+    [
+      {"text": "You have walked a lonesome trail", "color": "#C68C2B"}
+    ],
+    [
+      {"text": "Peace and love will sure prevail", "color": "#C68C2B"}
+    ],
+    [
+      {"text": "Help me end this sorry tale", "color": "#C68C2B"}
+    ],
+    "",
+    "ASRIEL:",
+    [
+      {"text": "Deep inside, I feel a fire", "color": "#FFFBB0"}
+    ],
+    [
+      {"text": "Burns within me ever higher", "color": "#FFFBB0"}
+    ],
+    [
+      {"text": "Knowing I will soon prevail", "color": "#FFFBB0"}
+    ],
+    [
+      {"text": "Knowing I can end this tale", "color": "#FFFBB0"}
+    ],
+    "",
+    "BOTH:",
+    "Songs of freedom in our mind",
+    "'Cause that's the way the tale's designed",
+    "",
+    "FRISK:",
+    "I got this far by being kind",
+    "And I will not stop now!",
+    "",
+    "BOTH:",
+    "Life paves endless branching roads",
+    "But we choose the ones we follow",
+    "",
+    "ASRIEL:",
+    "And there is so much left to show",
+    "If you could show me how!",
+    "",
+    "BOTH:",
+    "What's broken can be repaired",
+    "And ever soul could be spared",
+    "",
+    "FRISK:",
+    "So come, Asriel, don't be scared",
+    "",
+    "ASRIEL:",
+    "Only for you, my friend",
+    "",
+    "BOTH:",
+    "Angels fly and spread their wings",
+    "Soaring atop our hopes and dreams",
+    "So here, where it means everything",
+    "Let's make a happy end!",
+    "",
+    "NOTE: THIS TOOK SO LONG XD",
+    "SECOND NOTE: There's like, two systems at play xD"
+  ]
+}

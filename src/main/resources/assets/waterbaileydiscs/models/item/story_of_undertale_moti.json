@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "waterbaileydiscs:item/discs/non-main/story_of_undertale_moti"
+  }
+}

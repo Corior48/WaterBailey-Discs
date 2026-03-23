@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "waterbaileydiscs:item/discs/non-main/rambley_kinito_rap"
+  }
+}

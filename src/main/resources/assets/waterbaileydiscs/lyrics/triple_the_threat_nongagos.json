@@ -1,0 +1,443 @@
+{
+  "item": "waterbaileydiscs:triple_the_threat_nongagos",
+  "title": "Triple The Threat With Lyrics",
+  "texture": "triple_the_threat_nongagos",
+  "font": "waterbaileydiscs:dtm_sans",
+  "lines": [
+    "KEY:",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "sans"
+    },
+    {
+      "font": "waterbaileydiscs:papyrus_ut",
+      "text": "PAPYRUS"
+    },
+    {
+      "font": "waterbaileydiscs:dotumche",
+      "text": "Chara"
+    },
+    "All at once",
+    "",
+    {"setFont": "waterbaileydiscs:comic_sans_ut"},
+    "let's just get to the point.",
+    "",
+    "here once again, right before the end",
+    "an old friend",
+    "like you even care...",
+    [
+      {"text": "you're not here to ", "color": "#FFFFFF"},
+      {"text": "spare...", "color": "#F5FF00"}
+    ],
+    "everyone you slew",
+    "and all that you've put us through...",
+    [
+      {"text": "suffice to say ", "color": "#FFFFFF"},
+      {"text": "karma's ", "color": "#A800FD"},
+      {"text": "long overdue.", "color": "#FFFFFF"}
+    ],
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "HERE ONCE AGAIN, RIGHT BEFORE THE END",
+    "LET'S BEGIN",
+    "DO YOU STILL BELIEVE-",
+    "THERE'S A CHANCE YOU'LL WIN?",
+    "EVERYONE YOU SLEW...",
+    "AND ALL THAT YOU'VE PUT US THROUGH...",
+    "SUPPOSE IT WERE TO COME BACK AND HAUNT YOU?",
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "Here once again, right before the end",
+    "You load in.",
+    "What a joke it's been!",
+    [
+      {"text": "Determination...", "color": "#F70002"}
+    ],
+    "Everyone you slew",
+    "And all that you've put us through...",
+    "You're gonna lose no matter-",
+    [
+      {"text": "what you do.", "color": "#FC002D"}
+    ],
+    {"setFont": "waterbaileydiscs:dtm_sans"},
+    "",
+    "Now we've begun, this should be some fun",
+    "Three on one!",
+    "Settling the score, what was all this for?",
+    "Everyone you killed, don't bother explaining kid",
+    "No one gives a damn 'bout why you did this!",
+    "Looking outside, a beautiful day...",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "gotta say!"
+    },
+    "Hear the birds singing while these flowers bloom",
+    "See those church bells ringing",
+    "Now they're sounding out your doom!",
+    "Seems this trio's a bit much for you with-",
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "TIMELINES CHANGING, REARRANGING...",
+    [
+      {"text": "YOUR VERY ", "color": "#FFFFFF"},
+      {"text": "SOUL'S ", "color": "#FE9C04"},
+      {"text": "SHAKING", "color": "#FFFFFF"}
+    ],
+    "PROMISES WE'RE BRAKING",
+    "HOPES AND DREAMS ARE FADING",
+    "GIVE UP, 'CAUSE YOU'RE OUT OF LUCK...",
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "see it's pointless?",
+    "Clinging to these choices...",
+    "Thinking 'cause, \"I can, I must.\"",
+    "Still can't pass us",
+    [
+      {"text": "Chained down by you ", "color": "#FFFFFF"},
+      {"text": "bloodlust", "color": "#F90001"}
+    ],
+    "Plus! I'm not turning to dust!",
+    "",
+    {"setFont": "waterbaileydiscs:comic_sans_ut"},
+    "here in this hall",
+    "i will see that you fall",
+    [
+      {"text": "triple the threat... ", "color": "#F60003"},
+      {"text": "kid, you giving up yet?", "color": "#FFFFFF"}
+    ],
+    "any regrets?",
+    "better reset...",
+    "'cause there ain't a chance in hell we're gonna forget",
+    "here in this hall",
+    "can you hear their souls call?",
+    "all of these sins",
+    "where to even begin?",
+    "was this a grudge?",
+    "or just, for fun?",
+    "well, it's not like it matters",
+    "i mean who am i to-",
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "JUDGEMENT COMES",
+    "AND YOU SHAN'T ESCAPE IT",
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "Everything you've sought after",
+    "I'll show you it doesn't matter",
+    "Everything",
+    "EVERYTHING!",
+    "Ugh!",
+    "Stop that laughter!",
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    [
+      {"text": "JUSTICE ", "color": "#F6FE05"},
+      {"text": "WHICH WE HAVE LONG AWAITED", "color": "#FFFFFF"}
+    ],
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "Doing all this 'cause you can?",
+    "What a childish way to act!",
+    "Sins crawling down your back, soon-",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "it'll crack."
+    },
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "FACE",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "there's no surviving"
+    },
+    "A FATE",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "you'll keep on dying"
+    },
+    "ONLY YOU",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "still think i'm lying?"
+    },
+    "CAN RESET",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "then keep retrying..."
+    },
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "Time and time again you're back",
+    "We'll match each and every attack",
+    "On your own, all alone, sounds-",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "like you're boned"
+    },
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "WE",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "i warned you 'bout this"
+    },
+    "ARE BEGINNING",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "no one's forgetting"
+    },
+    "TO LOOSE",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "if you want out kid"
+    },
+    [
+      {"text": "PATIENCE", "color": "#04E2FB"}
+    ],
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "All of our bothers slaughtered",
+    "Who here is the real monster?",
+    "All these lives, all this time...",
+    "Stop refusing to DIE!",
+    "Why?",
+    {
+      "segments": [
+        {
+          "font": "waterbaileydiscs:dotumche",
+          "text": "Why?"
+        },
+        {
+          "font": "waterbaileydiscs:dtm_sans",
+          "text": " | "
+        },
+        {
+          "font": "waterbaileydiscs:comic_sans_ut",
+          "text": "why?"
+        }
+      ]
+    },
+    {
+      "font": "waterbaileydiscs:dtm_sans",
+      "text": "WHY?"
+    },
+    "",
+    {"setFont": "waterbaileydiscs:dtm_sans"},
+    "Let us ask once more...",
+    "What was all this for?",
+    "",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "HERE FOR A FRIEND",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "no need to attack..."
+    },
+    "RIGHT BEFORE THE END",
+    "WHY PRETEND?",
+    "DO YOU STILL BELIEVE",
+    "THAT YOU NEED TO WIN?",
+    "EVERYTHING YOU'VE DONE",
+    "EVEN IF IT WAS FOR FUN",
+    "IF YOU'LL JUST RESET",
+    "THEN WE'LL FORGIVE THIS RUN",
+    "",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "Here for a friend",
+    {
+      "font": "waterbaileydiscs:comic_sans_ut",
+      "text": "let us send you back..."
+    },
+    "Right before the end",
+    "Let us in",
+    "One last chance to give",
+    "Please don't try again...",
+    "Everything you've done",
+    "Even if it was for fun",
+    "If you just RESET",
+    "Then we'll forget this run",
+    "so-",
+    "",
+    {"setFont": "waterbaileydiscs:comic_sans_ut"},
+    [
+      {"text": "attack, ", "color": "#0047FF"},
+      {"text": "you feel your sins stack", "color": "#FFFFFF"}
+    ],
+    {
+      "segments": [
+        {
+          "text": "FALL",
+          "font": "waterbaileydiscs:papyrus_ut"
+        },
+        {
+          "text": " | ",
+          "font": "waterbaileydiscs:dtm_sans"
+        },
+        {
+          "text": "Fall",
+          "font": "waterbaileydiscs:dotumche"
+        }
+      ]
+    },
+    "here now,",
+    "you think we'd just allow-",
+    {
+      "segments": [
+        {
+          "text": "Why won't you fall?",
+          "font": "waterbaileydiscs:dotumche"
+        },
+        {
+          "text": " | ",
+          "font": "waterbaileydiscs:dtm_sans"
+        },
+        {
+          "text": "WHY WON'T YOU FALL?",
+          "font": "waterbaileydiscs:papyrus_ut"
+        }
+      ]
+    },
+    "all this? it'd better end here kid",
+    [
+      {"text": "Crawl", "font": "waterbaileydiscs:dotumche"}
+    ],
+    "you know... how things are bound to go",
+    [
+      {"text": "slow down!", "color": "#0046FF"}
+    ],
+    [
+      {"text": "STALL", "font": "waterbaileydiscs:papyrus_ut"}
+    ],
+    "you're not coming around.",
+    "listen",
+    {
+      "segments": [
+        {
+          "text": "SEEMS",
+          "font": "waterbaileydiscs:papyrus_ut"
+        },
+        {
+          "text": " | ",
+          "font": "waterbaileydiscs:dtm_sans"
+        },
+        {
+          "text": "Seems",
+          "font": "waterbaileydiscs:dotumche"
+        }
+      ]
+    },
+    [
+      {"text": "we've gotta have ", "color": "#FFFFFF"},
+      {"text": "justice", "color": "#FBFF01"}
+    ],
+    {
+      "segments": [
+        {
+          "text": "We've",
+          "font": "waterbaileydiscs:dotumche"
+        },
+        {
+          "text": " | ",
+          "font:": "waterbaileydiscs:dtm_sans"
+        },
+        {
+          "text": "WE'VE",
+          "font": "waterbaileydiscs:papyrus_ut"
+        }
+      ]
+    },
+    "for them, everyone of our friends",
+    {
+      "segments": [
+        {
+          "text": "STILL",
+          "font": "waterbaileydiscs:papyrus_ut"
+        },
+        {
+          "text": " | ",
+          "font": "waterbaileydiscs:dtm_sans"
+        },
+        {
+          "text": "Still",
+          "font": "waterbaileydiscs:dotumche"
+        }
+      ]
+    },
+    "you fought... and yet it seems that we've still-",
+    [
+      {"text": "Lost", "font": "waterbaileydiscs:dtm_sans"}
+    ],
+    "",
+    "guess that's it then, huh?",
+    [
+      {"text": "Just don't say we didn't warn you", "font": "waterbaileydiscs:dotumche"}
+    ],
+    [
+      {"text": "HEH, I'M THAT'S WHAT YOU WERE EXPECTING US TO SAY, ISN'T THAT RIGHT HUMAN?", "font": "waterbaileydiscs:papyrus_ut"}
+    ],
+    {"setFont": "waterbaileydiscs:dtm_sans"},
+    "Burn. In. Hell.",
+    "",
+    "<insert sans flashbacks>",
+    "",
+    {"setFont": "waterbaileydiscs:comic_sans_ut"},
+    "wait!",
+    "",
+    "one last chance,",
+    "it's in your hands",
+    "i'm begging you to bring it back",
+    [
+      {"text": "(Bring it back...)", "font": "waterbaileydiscs:dotumche"}
+    ],
+    "a world where monsters hoped and dreamed,",
+    [
+      {"text": "(Or don't!)", "font": "waterbaileydiscs:dotumche"}
+    ],
+    "a world that used to have meaning...",
+    [
+      {"text": "(BUT YOU WON'T.)", "font": "waterbaileydiscs:papyrus_ut"}
+    ],
+    "you went and tore it all to shreds",
+    [
+      {"text": "(YOU'VE NOT ONE REGRET...", "font": "waterbaileydiscs:papyrus_ut"}
+    ],
+    "left every last one of 'em dead",
+    "...you know what?",
+    "i tried.",
+    "guess this is...",
+    "goodbye.",
+    "",
+    {"setFont": "waterbaileydiscs:dtm_sans"},
+    "Here at the end",
+    "Even without friends",
+    [
+      {"text": "Determined", "color": "#FF0001"}
+    ],
+    "Is there still a chance to stop your advance?",
+    "Everyone you dusted",
+    "After how we trusted you",
+    "Us three already know that we might lose",
+    "Looking around, everything is gray",
+    "Gotta' say-",
+    "Can't help but thinking this'll be our tomb",
+    "Church bells kept on ringing",
+    "Now they're sounding out our doom",
+    "Seems this trio wasn't enough for you...",
+    "",
+    "Knife in hand",
+    "Determined as ever you stand...",
+    "What in hell's name",
+    "Might it take for your will to break..?",
+    {"setFont": "waterbaileydiscs:papyrus_ut"},
+    "WITH HATRED LIKE YOURS, HOW CAN WE WIN?",
+    "I PRAY I MAY NEVER",
+    "MEET YOUR WRETCHED GAZE AGAIN...",
+    {"setFont": "waterbaileydiscs:comic_sans_ut"},
+    "here in this hall...",
+    "had really hoped you'd fall",
+    "here in this hall...",
+    "will you hear my soul call?",
+    {"setFont": "waterbaileydiscs:dotumche"},
+    "You are the worst of humanity",
+    "We'll be here fighting for eternity..."
+  ]
+}

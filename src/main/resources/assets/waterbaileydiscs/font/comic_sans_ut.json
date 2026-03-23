@@ -1,0 +1,11 @@
+{
+  "providers": [
+    {
+      "type": "ttf",
+      "file": "waterbaileydiscs:comic_sans_ut.ttf",
+      "shift": [0, 0],
+      "size": 10,
+      "oversample": 2.0
+    }
+  ]
+}
